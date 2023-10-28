@@ -7,7 +7,7 @@ module.exports = {
     production : {
       key: 'key.pem',
       user : 'ubuntu',
-      host : '3.27.190.73',
+      host : '3.27.124.239',
       ref  : 'origin/main',
       repo : 'git@github.com:nohgijin/swimday-client.git',
       path : '/home/ubuntu',
