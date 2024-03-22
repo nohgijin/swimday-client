@@ -6,7 +6,7 @@ function Page() {
     { target: 'record', label: '기록 검색' },
     { target: 'schedule', label: '대회 일정' },
   ]
- 
+
   return (
     <main>
       <Tab values={values} />
