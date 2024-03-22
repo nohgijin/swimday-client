@@ -1,5 +1,6 @@
 'use client'
 import Tab from '@/components/Tab'
+import { Button } from '@mantine/core'
 
 function Page() {
   const values = [
@@ -10,6 +11,7 @@ function Page() {
   return (
     <main>
       <Tab values={values} />
+      <Button>상세검색 열기</Button>
     </main>
   )
 }
