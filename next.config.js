@@ -15,6 +15,24 @@ const nextConfig = {
     includePaths: [path.join(__dirname, 'styles')],
     prependData: `@import "styles/color.scss"; @import "styles/typo.scss";`,
   },
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.svg$/i,
+      use: ['@svgr/webpack'],
+    })
+
+    return config
+  },
+  plugins: [
+    {
+      name: 'preset-default',
+      params: {
+        overrides: {
+          removeViewBox: false,
+        },
+      },
+    },
+  ],
 }
 
 module.exports = nextConfig
