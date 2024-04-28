@@ -1,0 +1,10 @@
+.chip-group {
+  display: flex;
+
+  .filter {
+    &.mantine-Group-root {
+      background: red;
+      gap: 12px;
+    }
+  }
+}
