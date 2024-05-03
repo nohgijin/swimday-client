@@ -1,10 +1,23 @@
 .chip-group {
   display: flex;
+}
 
-  .filter {
-    &.mantine-Group-root {
-      background: red;
-      gap: 12px;
+.title{
+  @include typo-regular-body2();
+}
+
+
+.chip > label[data-checked="true"] {
+  background: $status-selected-y;
+  color:$text-blue-10;
+
+  svg{
+    path{
+      fill:$text-blue-10;
     }
   }
+}
+
+.chip > label[data-checked="false"] {
+  background: $status-selected-n;
 }
