@@ -30,7 +30,7 @@ function Page() {
           color={color['$text-black-30']}
           onClick={() => setIsOpen(!isOpen)}
         >
-          상세검색 열기
+          상세검색 {isOpen ? '닫기' : '열기'}
         </Button>
       </div>
     </main>

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Chip } from '@mantine/core'
-import $ from './style.module.scss';
+import $ from './style.module.scss'
 
 const FILTERS = [
   [
@@ -14,7 +14,7 @@ const FILTERS = [
     },
     {
       value: 'fast',
-      label: '빠른순',
+      label: '최고기록순',
     },
   ],
   [
@@ -56,59 +56,97 @@ const FILTERS = [
 ]
 
 function AChipGroup() {
-  const [sortValue, setSortValue] = useState(['new'])
-  const [sexValue, setSexValue] = useState(FILTERS[1].map(({value})=>value))
-  const [eventValue, setEventValue] = useState(FILTERS[2].map(({value})=>value))
+  const [sortValue, setSortValue] = useState('new')
+  const [sexValue, setSexValue] = useState(FILTERS[1].map(({ value }) => value))
+  const [eventValue, setEventValue] = useState(
+    FILTERS[2].map(({ value }) => value),
+  )
 
+  const handleAllChange = (value: boolean, kind: 'SEX' | 'EVENT') => {
+    const setValue = kind === 'SEX' ? setSexValue : setEventValue
 
-  const handleAllChange=(value:boolean,kind:"SEX"|"EVENT")=>{
-    const setValue = kind==="SEX"?setSexValue:setEventValue;
-
-    if(value){
-      const FILTER_INDEX=kind==="SEX"?1:2;
-      const allValue = FILTERS[FILTER_INDEX].map(({value})=>value)
+    if (value) {
+      const FILTER_INDEX = kind === 'SEX' ? 1 : 2
+      const allValue = FILTERS[FILTER_INDEX].map(({ value }) => value)
       setValue(allValue)
-      return;
+      return
     }
 
     setValue([])
   }
 
-
+  console.log(sortValue, sexValue, eventValue)
 
   return (
     <>
-      <span className={$.title}>정렬</span>
+      <div className={$.title}>정렬</div>
       <div className={$['chip-group']}>
-      <Chip.Group multiple onChange={(value)=>setSortValue(value)}>
-        {FILTERS[0].map(({ label, value }) => (
-          <Chip className={$.chip} key={value} value={value} checked={sortValue.includes(value)}>
-            {label}
-          </Chip>
-        ))}
-      </Chip.Group>
+        <Chip.Group onChange={(value) => setSortValue(value)}>
+          {FILTERS[0].map(({ label, value }) => (
+            <Chip
+              className={$.chip}
+              key={value}
+              value={value}
+              checked={sortValue === value}
+            >
+              {label}
+            </Chip>
+          ))}
+        </Chip.Group>
       </div>
-      <span className={$.title}>정렬</span>
+      <div className={$.title}>성별</div>
       <div className={$['chip-group']}>
-      <Chip className={$.chip}  value={"all"} checked={sexValue.length===FILTERS[1].length} onChange={(value)=>handleAllChange(value,"SEX")}>전체</Chip>
-      <Chip.Group multiple value={sexValue} onChange={(value)=>setSexValue(value)}>
-        {FILTERS[1].map(({ label, value }) => (
-          <Chip className={$.chip} key={value} value={value} checked={sexValue.includes(value)}>
-            {label}
-          </Chip>
-        ))}
-      </Chip.Group>
+        <Chip
+          className={$.chip}
+          value={'all'}
+          checked={sexValue.length === FILTERS[1].length}
+          onChange={(value) => handleAllChange(value, 'SEX')}
+        >
+          전체
+        </Chip>
+        <Chip.Group
+          multiple
+          value={sexValue}
+          onChange={(value) => setSexValue(value)}
+        >
+          {FILTERS[1].map(({ label, value }) => (
+            <Chip
+              className={$.chip}
+              key={value}
+              value={value}
+              checked={sexValue.includes(value)}
+            >
+              {label}
+            </Chip>
+          ))}
+        </Chip.Group>
       </div>
-      <span className={$.title}>정렬</span>
+      <div className={$.title}>종목</div>
       <div className={$['chip-group']}>
-      <Chip className={$.chip}  value={"all"} checked={eventValue.length===FILTERS[2].length} onChange={(value)=>handleAllChange(value,"EVENT")}>전체</Chip>
-      <Chip.Group multiple value={eventValue} onChange={(value)=>setEventValue(value)}>
-        {FILTERS[2].map(({ label, value }) => (
-          <Chip className={$.chip}  key={value} value={value} checked={eventValue.includes(value)}>
-            {label}
-          </Chip>
-        ))}
-      </Chip.Group>
+        <Chip
+          className={$.chip}
+          value={'all'}
+          checked={eventValue.length === FILTERS[2].length}
+          onChange={(value) => handleAllChange(value, 'EVENT')}
+        >
+          전체
+        </Chip>
+        <Chip.Group
+          multiple
+          value={eventValue}
+          onChange={(value) => setEventValue(value)}
+        >
+          {FILTERS[2].map(({ label, value }) => (
+            <Chip
+              className={$.chip}
+              key={value}
+              value={value}
+              checked={eventValue.includes(value)}
+            >
+              {label}
+            </Chip>
+          ))}
+        </Chip.Group>
       </div>
     </>
   )

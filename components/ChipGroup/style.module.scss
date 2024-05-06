@@ -1,23 +1,39 @@
 .chip-group {
   display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
 }
 
-.title{
+.title {
   @include typo-regular-body2();
+  margin-bottom: 8px;
 }
 
 
 .chip > label[data-checked="true"] {
   background: $status-selected-y;
-  color:$text-blue-10;
+  color: $text-blue-10;
 
-  svg{
-    path{
-      fill:$text-blue-10;
+  svg {
+    path {
+      fill: $text-blue-10;
     }
   }
 }
 
 .chip > label[data-checked="false"] {
   background: $status-selected-n;
+}
+
+.chip {
+  label {
+    height: 44px;
+    padding: 8px 16px;
+    border-radius: 30px;
+  }
+
+  span {
+    @include typo-regular-body1();
+  }
 }
