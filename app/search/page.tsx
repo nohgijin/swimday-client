@@ -2,12 +2,13 @@
 import Tab from '@/components/Tab'
 import { Button } from '@mantine/core'
 import Plus from '@/assets/plus.svg'
+import Close from '@/assets/close.svg'
 import $ from './style.module.scss'
 import color from '@/styles/color'
 import Logo from '@/components/Logo'
 import Input from '@/components/Input'
 import { useState } from 'react'
-import AChipGroup from '@/components/ChipGroup'
+import ChipGroup from '@/components/ChipGroup'
 
 function Page() {
   const values = [
@@ -22,10 +23,16 @@ function Page() {
       <Tab values={values} />
       <div className={$.search}>
         <Input></Input>
-        {isOpen && <AChipGroup />}
+        {isOpen && <ChipGroup />}
         <Button
           className={$['detail-search']}
-          leftSection={<Plus width={12} height={12} />}
+          leftSection={
+            isOpen ? (
+              <Close width={12} height={12} />
+            ) : (
+              <Plus width={12} height={12} />
+            )
+          }
           variant={'white'}
           color={color['$text-black-30']}
           onClick={() => setIsOpen(!isOpen)}

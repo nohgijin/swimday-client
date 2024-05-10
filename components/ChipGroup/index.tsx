@@ -48,6 +48,8 @@ const FILTERS = [
       value: 'im',
       label: '개인혼영',
     },
+  ],
+  [
     { value: 'relay', label: '계영' },
     { value: 'imRelay', label: '혼계영' },
     { value: 'mixedGenderRelay', label: '혼성계영' },
@@ -55,12 +57,13 @@ const FILTERS = [
   ],
 ]
 
-function AChipGroup() {
+function ChipGroup() {
   const [sortValue, setSortValue] = useState('new')
   const [sexValue, setSexValue] = useState(FILTERS[1].map(({ value }) => value))
-  const [eventValue, setEventValue] = useState(
-    FILTERS[2].map(({ value }) => value),
-  )
+  const [eventValue, setEventValue] = useState([
+    ...FILTERS[2].map(({ value }) => value),
+    ...FILTERS[3].map(({ value }) => value),
+  ])
 
   const handleAllChange = (value: boolean, kind: 'SEX' | 'EVENT') => {
     const setValue = kind === 'SEX' ? setSexValue : setEventValue
@@ -122,7 +125,7 @@ function AChipGroup() {
         </Chip.Group>
       </div>
       <div className={$.title}>종목</div>
-      <div className={$['chip-group']}>
+      <div className={$['chip-group']} style={{ flexDirection: 'column' }}>
         <Chip
           className={$.chip}
           value={'all'}
@@ -136,20 +139,34 @@ function AChipGroup() {
           value={eventValue}
           onChange={(value) => setEventValue(value)}
         >
-          {FILTERS[2].map(({ label, value }) => (
-            <Chip
-              className={$.chip}
-              key={value}
-              value={value}
-              checked={eventValue.includes(value)}
-            >
-              {label}
-            </Chip>
-          ))}
+          <div className={$['personal-event']}>
+            {FILTERS[2].map(({ label, value }) => (
+              <Chip
+                className={$.chip}
+                key={value}
+                value={value}
+                checked={eventValue.includes(value)}
+              >
+                {label}
+              </Chip>
+            ))}
+          </div>
+          <div className={$['team-event']}>
+            {FILTERS[3].map(({ label, value }) => (
+              <Chip
+                className={$.chip}
+                key={value}
+                value={value}
+                checked={eventValue.includes(value)}
+              >
+                {label}
+              </Chip>
+            ))}
+          </div>
         </Chip.Group>
       </div>
     </>
   )
 }
 
-export default AChipGroup
+export default ChipGroup
