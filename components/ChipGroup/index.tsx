@@ -1,6 +1,6 @@
-import { useState } from 'react'
 import { Chip } from '@mantine/core'
 import $ from './style.module.scss'
+import { parseAsString, useQueryState } from 'nuqs'
 
 const FILTERS = [
   [
@@ -58,27 +58,43 @@ const FILTERS = [
 ]
 
 function ChipGroup() {
-  const [sortValue, setSortValue] = useState('new')
-  const [sexValue, setSexValue] = useState(FILTERS[1].map(({ value }) => value))
-  const [eventValue, setEventValue] = useState([
-    ...FILTERS[2].map(({ value }) => value),
-    ...FILTERS[3].map(({ value }) => value),
-  ])
+  const [sortValue, setSortValue] = useQueryState(
+    'sort',
+    parseAsString.withDefault('new'),
+  )
+  const [sexValue, setSexValue] = useQueryState(
+    'sex',
+    parseAsString.withDefault(FILTERS[1].map(({ value }) => value).toString()),
+  )
+  const [eventValue, setEventValue] = useQueryState(
+    'event',
+    parseAsString.withDefault(
+      [
+        ...FILTERS[2].map(({ value }) => value),
+        ...FILTERS[3].map(({ value }) => value),
+      ].toString(),
+    ),
+  )
+
+  console.log(eventValue, 'ㅎㅎ')
 
   const handleAllChange = (value: boolean, kind: 'SEX' | 'EVENT') => {
     const setValue = kind === 'SEX' ? setSexValue : setEventValue
-
-    if (value) {
-      const FILTER_INDEX = kind === 'SEX' ? 1 : 2
-      const allValue = FILTERS[FILTER_INDEX].map(({ value }) => value)
-      setValue(allValue)
+    if (!value) {
+      return setValue([])
+    }
+    if (kind === 'SEX') {
+      const allValue = FILTERS[1].map(({ value }) => value)
+      setSexValue(allValue)
       return
     }
 
-    setValue([])
+    const allValue = [
+      ...FILTERS[2].map(({ value }) => value),
+      ...FILTERS[3].map(({ value }) => value),
+    ]
+    setEventValue(allValue)
   }
-
-  console.log(sortValue, sexValue, eventValue)
 
   return (
     <>
@@ -129,7 +145,7 @@ function ChipGroup() {
         <Chip
           className={$.chip}
           value={'all'}
-          checked={eventValue.length === FILTERS[2].length}
+          checked={eventValue.length === FILTERS[2].length + FILTERS[3].length}
           onChange={(value) => handleAllChange(value, 'EVENT')}
         >
           전체
