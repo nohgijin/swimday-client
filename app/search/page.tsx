@@ -9,7 +9,8 @@ import Logo from '@/components/Logo'
 import { useState } from 'react'
 import ChipGroup, { FILTERS } from '@/components/ChipGroup'
 import Search from '@/assets/search.svg'
-import { parseAsString, useQueryStates } from 'nuqs'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 const TABS = [
   { target: 'record', label: '기록 검색' },
@@ -25,17 +26,8 @@ function Page() {
     ...FILTERS[3].map(({ value }) => value),
   ])
   const [name, setName] = useState('')
-  const [search, setSearch] = useQueryStates(
-    {
-      sort: parseAsString.withDefault('null'),
-      sex: parseAsString.withDefault('null'),
-      event: parseAsString.withDefault('null'),
-      name: parseAsString.withDefault('null'),
-    },
-    {
-      history: 'push',
-    },
-  )
+
+  const router = useRouter()
 
   return (
     <main>
@@ -48,15 +40,9 @@ function Page() {
           rightSectionPointerEvents={'all'}
           rightSection={
             <ActionIcon
-              variant={'white'}
-              onClick={() => {
-                setSearch({
-                  sort,
-                  sex: sex.toString(),
-                  event: event.toString(),
-                  name,
-                })
-              }}
+              variant={'transparent'}
+              component={Link}
+              href={`/result?sort=${sort}&sex=${sex.toString()}&event=${event.toString()}&name=${name}`}
             >
               <Search width={16} height={16} />
             </ActionIcon>
@@ -64,12 +50,9 @@ function Page() {
           value={name}
           onKeyDown={(e) => {
             if (e.code === 'Enter') {
-              setSearch({
-                sort,
-                sex: sex.toString(),
-                event: event.toString(),
-                name,
-              })
+              router.push(
+                `/result?sort=${sort}&sex=${sex.toString()}&event=${event.toString()}&name=${name}`,
+              )
             }
           }}
           onChange={(e) => {
@@ -97,7 +80,7 @@ function Page() {
               <Plus width={12} height={12} />
             )
           }
-          variant={'white'}
+          variant={'transparent'}
           color={color['$text-black-30']}
           onClick={() => setIsOpen(!isOpen)}
         >
