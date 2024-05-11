@@ -2,7 +2,7 @@
   height: 100vh;
   padding: 12px 24px 24px;
   overflow: auto;
-  background: $background;
+  background: $background-40;
 
   .input-wrapper {
     display: flex;
@@ -16,7 +16,7 @@
 
     .input {
       width: 100%;
-      
+
       input {
         height: 52px;
         padding: 12px 24px;

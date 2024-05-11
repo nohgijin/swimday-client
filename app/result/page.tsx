@@ -6,10 +6,10 @@ import Link from 'next/link'
 import Search from '@/assets/search.svg'
 import { useQueryState } from 'nuqs'
 import { useState } from 'react'
-import SearchInput from '@/components/SearchInput'
+import SearchInput from '@/components/SearchInputChip'
 
 function Page() {
-  const [name, setName] = useState(useQueryState('name'))
+  const [name, setName] = useState(useQueryState('name')[0])
   const [isClickInput, setIsClickInput] = useState(false)
 
   if (isClickInput) {

@@ -1,24 +1,32 @@
 import $ from './style.module.scss'
 import Back from '@/assets/back.svg'
 import { ActionIcon, Input } from '@mantine/core'
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 import Search from '@/assets/search.svg'
 import { parseAsString, useQueryStates } from 'nuqs'
+import ChipGroup from '@/components/ChipGroup'
 
 type Props = {
   setIsClickInput: Dispatch<SetStateAction<boolean>>
 }
 
-function SearchInput({ setIsClickInput }: Props) {
+function SearchInputChip({ setIsClickInput }: Props) {
   const [queries, setQueries] = useQueryStates({
     sort: parseAsString,
     sex: parseAsString,
     event: parseAsString,
     name: parseAsString,
   })
+  const [sex, setSex] = useState(
+    (queries.sex as string)?.split(',').map((value) => value),
+  )
+  const [event, setEvent] = useState(
+    (queries.event as string)?.split(',').map((value) => value),
+  )
+
   return (
-    <div className={$['search-input']}>
-      <div className={$['input-wrapper']}>
+    <div className={$['search-input-chip']}>
+      <div className={$['search-input']}>
         <ActionIcon
           className={$.back}
           variant={'transparent'}
@@ -37,11 +45,24 @@ function SearchInput({ setIsClickInput }: Props) {
           }
           value={queries.name}
           onChange={(e) => setQueries({ name: e.currentTarget.value })}
-          onClick={() => setIsClickInput(true)}
         />
       </div>
+      <ChipGroup
+        sort={queries.sort as string}
+        sex={(queries.sex as string)?.split(',')}
+        event={(queries.event as string)?.split(',')}
+        setSort={(value: string) => setQueries({ ...queries, sort: value })}
+        setSex={(value) => {
+          setSex(value)
+          setQueries({ ...queries, sex: value.toString() })
+        }}
+        setEvent={(value) => {
+          setEvent(value)
+          setQueries({ ...queries, event: value.toString() })
+        }}
+      />
     </div>
   )
 }
 
-export default SearchInput
+export default SearchInputChip

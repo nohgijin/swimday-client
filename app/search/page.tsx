@@ -30,7 +30,7 @@ function Page() {
   const router = useRouter()
 
   return (
-    <main>
+    <main className={$['search-wrapper']}>
       <Logo />
       <Tab values={TABS} />
       <div className={$.search}>

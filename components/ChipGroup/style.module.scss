@@ -18,8 +18,12 @@
 }
 
 
+.chip > label {
+  background: $status-selected-n !important;
+}
+
 .chip > label[data-checked="true"] {
-  background: $status-selected-y;
+  background: $status-selected-y !important;
   color: $text-blue-10;
 
   svg {
@@ -29,9 +33,6 @@
   }
 }
 
-.chip > label[data-checked="false"] {
-  background: $status-selected-n;
-}
 
 .chip {
   label {

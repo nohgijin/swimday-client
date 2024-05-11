@@ -7,11 +7,11 @@ const color = {
   '$text-black-60': '#fdfdfd',
   '$text-blue-10': '#00306d',
 
-  '$text-background-10': '#494949',
-  '$text-background-20': '#b3b3b3',
-  '$text-background-30': '#e3e3e3',
-  '$text-background-40': '#f4f4f4',
-  '$text-background-50': '#fdfdfd',
+  '$background-10': '#494949',
+  '$background-20': '#b3b3b3',
+  '$background-30': '#e3e3e3',
+  '$background-40': '#f4f4f4',
+  '$background-50': '#fdfdfd',
 
   '$status-activated-primary': '#1d7bf3',
   '$status-activated-secondary': '#1d7bf3',
