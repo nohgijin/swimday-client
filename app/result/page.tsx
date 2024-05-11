@@ -9,7 +9,7 @@ import { useState } from 'react'
 import SearchInput from '@/components/SearchInputChip'
 
 function Page() {
-  const [name, setName] = useState(useQueryState('name')[0])
+  const [name, setName] = useQueryState('name')
   const [isClickInput, setIsClickInput] = useState(false)
 
   if (isClickInput) {

@@ -1,7 +1,7 @@
 import $ from './style.module.scss'
 import Back from '@/assets/back.svg'
 import { ActionIcon, Input } from '@mantine/core'
-import { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import Search from '@/assets/search.svg'
 import { parseAsString, useQueryStates } from 'nuqs'
 import ChipGroup from '@/components/ChipGroup'
@@ -11,18 +11,32 @@ type Props = {
 }
 
 function SearchInputChip({ setIsClickInput }: Props) {
-  const [queries, setQueries] = useQueryStates({
-    sort: parseAsString,
-    sex: parseAsString,
-    event: parseAsString,
-    name: parseAsString,
-  })
+  const [queries, setQueries] = useQueryStates(
+    {
+      sort: parseAsString,
+      sex: parseAsString,
+      event: parseAsString,
+      name: parseAsString,
+    },
+    { history: 'push' },
+  )
+  const [sort, setSort] = useState(queries.sort)
   const [sex, setSex] = useState(
-    (queries.sex as string)?.split(',').map((value) => value),
+    (queries.sex || '').split(',').map((value) => value),
   )
   const [event, setEvent] = useState(
-    (queries.event as string)?.split(',').map((value) => value),
+    (queries.event || '').split(',').map((value) => value),
   )
+  const [name, setName] = useState(queries.name)
+
+  useEffect(() => {
+    console.log(sort, sex, event, queries, '쿼리즈즈')
+  }, [])
+
+  const handleSearch = () => {
+    setIsClickInput(false)
+    setQueries({ sort, sex: sex.toString(), event: event.toString(), name })
+  }
 
   return (
     <div className={$['search-input-chip']}>
@@ -39,26 +53,29 @@ function SearchInputChip({ setIsClickInput }: Props) {
           placeholder="선수/대회 검색하기"
           rightSectionPointerEvents={'all'}
           rightSection={
-            <ActionIcon variant={'transparent'}>
+            <ActionIcon variant={'transparent'} onClick={handleSearch}>
               <Search width={16} height={16} />
             </ActionIcon>
           }
-          value={queries.name}
-          onChange={(e) => setQueries({ name: e.currentTarget.value })}
+          value={name}
+          onChange={(e) => {
+            setName(e.currentTarget.value)
+          }}
+          onKeyDown={(e) => {
+            if (e.code === 'Enter') {
+              handleSearch()
+            }
+          }}
         />
       </div>
       <ChipGroup
-        sort={queries.sort as string}
-        sex={(queries.sex as string)?.split(',')}
-        event={(queries.event as string)?.split(',')}
-        setSort={(value: string) => setQueries({ ...queries, sort: value })}
-        setSex={(value) => {
-          setSex(value)
-          setQueries({ ...queries, sex: value.toString() })
-        }}
-        setEvent={(value) => {
-          setEvent(value)
-          setQueries({ ...queries, event: value.toString() })
+        {...{
+          sort,
+          sex,
+          event,
+          setSort,
+          setSex,
+          setEvent,
         }}
       />
     </div>
