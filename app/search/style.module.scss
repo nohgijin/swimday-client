@@ -17,3 +17,20 @@
     fill: $text-black-30;
   }
 }
+
+.input {
+  input {
+    height: 52px;
+    padding: 12px 24px;
+    border-radius: 30px;
+  }
+
+  div {
+    right: 24px;
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}

@@ -1,8 +1,8 @@
 import { Chip } from '@mantine/core'
 import $ from './style.module.scss'
-import { parseAsString, useQueryState } from 'nuqs'
+import { Dispatch, SetStateAction } from 'react'
 
-const FILTERS = [
+export const FILTERS = [
   [
     {
       value: 'new',
@@ -57,35 +57,24 @@ const FILTERS = [
   ],
 ]
 
-function ChipGroup() {
-  const [sortValue, setSortValue] = useQueryState(
-    'sort',
-    parseAsString.withDefault('new'),
-  )
-  const [sexValue, setSexValue] = useQueryState(
-    'sex',
-    parseAsString.withDefault(FILTERS[1].map(({ value }) => value).toString()),
-  )
-  const [eventValue, setEventValue] = useQueryState(
-    'event',
-    parseAsString.withDefault(
-      [
-        ...FILTERS[2].map(({ value }) => value),
-        ...FILTERS[3].map(({ value }) => value),
-      ].toString(),
-    ),
-  )
+type Props = {
+  sort: string
+  sex: string[]
+  event: string[]
+  setSort: Dispatch<SetStateAction<string>>
+  setSex: Dispatch<SetStateAction<string[]>>
+  setEvent: Dispatch<SetStateAction<string[]>>
+}
 
-  console.log(eventValue, 'ㅎㅎ')
-
+function ChipGroup({ sort, sex, event, setSort, setSex, setEvent }: Props) {
   const handleAllChange = (value: boolean, kind: 'SEX' | 'EVENT') => {
-    const setValue = kind === 'SEX' ? setSexValue : setEventValue
+    const setValue = kind === 'SEX' ? setSex : setEvent
     if (!value) {
       return setValue([])
     }
     if (kind === 'SEX') {
       const allValue = FILTERS[1].map(({ value }) => value)
-      setSexValue(allValue)
+      setSex(allValue)
       return
     }
 
@@ -93,20 +82,20 @@ function ChipGroup() {
       ...FILTERS[2].map(({ value }) => value),
       ...FILTERS[3].map(({ value }) => value),
     ]
-    setEventValue(allValue)
+    setEvent(allValue)
   }
 
   return (
     <>
       <div className={$.title}>정렬</div>
       <div className={$['chip-group']}>
-        <Chip.Group onChange={(value) => setSortValue(value)}>
+        <Chip.Group onChange={(value) => setSort(value)}>
           {FILTERS[0].map(({ label, value }) => (
             <Chip
               className={$.chip}
               key={value}
               value={value}
-              checked={sortValue === value}
+              checked={sort === value}
             >
               {label}
             </Chip>
@@ -118,22 +107,18 @@ function ChipGroup() {
         <Chip
           className={$.chip}
           value={'all'}
-          checked={sexValue.length === FILTERS[1].length}
+          checked={sex.length === FILTERS[1].length}
           onChange={(value) => handleAllChange(value, 'SEX')}
         >
           전체
         </Chip>
-        <Chip.Group
-          multiple
-          value={sexValue}
-          onChange={(value) => setSexValue(value)}
-        >
+        <Chip.Group multiple value={sex} onChange={(value) => setSex(value)}>
           {FILTERS[1].map(({ label, value }) => (
             <Chip
               className={$.chip}
               key={value}
               value={value}
-              checked={sexValue.includes(value)}
+              checked={sex.includes(value)}
             >
               {label}
             </Chip>
@@ -145,15 +130,15 @@ function ChipGroup() {
         <Chip
           className={$.chip}
           value={'all'}
-          checked={eventValue.length === FILTERS[2].length + FILTERS[3].length}
+          checked={event.length === FILTERS[2].length + FILTERS[3].length}
           onChange={(value) => handleAllChange(value, 'EVENT')}
         >
           전체
         </Chip>
         <Chip.Group
           multiple
-          value={eventValue}
-          onChange={(value) => setEventValue(value)}
+          value={event}
+          onChange={(value) => setEvent(value)}
         >
           <div className={$['personal-event']}>
             {FILTERS[2].map(({ label, value }) => (
@@ -161,7 +146,7 @@ function ChipGroup() {
                 className={$.chip}
                 key={value}
                 value={value}
-                checked={eventValue.includes(value)}
+                checked={event.includes(value)}
               >
                 {label}
               </Chip>
@@ -173,7 +158,7 @@ function ChipGroup() {
                 className={$.chip}
                 key={value}
                 value={value}
-                checked={eventValue.includes(value)}
+                checked={event.includes(value)}
               >
                 {label}
               </Chip>

@@ -1,29 +1,93 @@
 'use client'
 import Tab from '@/components/Tab'
-import { Button } from '@mantine/core'
+import { ActionIcon, Button, Input } from '@mantine/core'
 import Plus from '@/assets/plus.svg'
 import Close from '@/assets/close.svg'
 import $ from './style.module.scss'
 import color from '@/styles/color'
 import Logo from '@/components/Logo'
-import Input from '@/components/Input'
 import { useState } from 'react'
-import ChipGroup from '@/components/ChipGroup'
+import ChipGroup, { FILTERS } from '@/components/ChipGroup'
+import Search from '@/assets/search.svg'
+import { parseAsString, useQueryStates } from 'nuqs'
+
+const TABS = [
+  { target: 'record', label: '기록 검색' },
+  { target: 'schedule', label: '대회 일정' },
+]
 
 function Page() {
-  const values = [
-    { target: 'record', label: '기록 검색' },
-    { target: 'schedule', label: '대회 일정' },
-  ]
   const [isOpen, setIsOpen] = useState(false)
+  const [sort, setSort] = useState('new')
+  const [sex, setSex] = useState(FILTERS[1].map(({ value }) => value))
+  const [event, setEvent] = useState([
+    ...FILTERS[2].map(({ value }) => value),
+    ...FILTERS[3].map(({ value }) => value),
+  ])
+  const [name, setName] = useState('')
+  const [search, setSearch] = useQueryStates(
+    {
+      sort: parseAsString.withDefault('null'),
+      sex: parseAsString.withDefault('null'),
+      event: parseAsString.withDefault('null'),
+      name: parseAsString.withDefault('null'),
+    },
+    {
+      history: 'push',
+    },
+  )
 
   return (
     <main>
       <Logo />
-      <Tab values={values} />
+      <Tab values={TABS} />
       <div className={$.search}>
-        <Input></Input>
-        {isOpen && <ChipGroup />}
+        <Input
+          className={$.input}
+          placeholder="선수/대회 검색하기"
+          rightSectionPointerEvents={'all'}
+          rightSection={
+            <ActionIcon
+              variant={'white'}
+              onClick={() => {
+                setSearch({
+                  sort,
+                  sex: sex.toString(),
+                  event: event.toString(),
+                  name,
+                })
+              }}
+            >
+              <Search width={16} height={16} />
+            </ActionIcon>
+          }
+          value={name}
+          onKeyDown={(e) => {
+            if (e.code === 'Enter') {
+              setSearch({
+                sort,
+                sex: sex.toString(),
+                event: event.toString(),
+                name,
+              })
+            }
+          }}
+          onChange={(e) => {
+            setName(e.currentTarget.value)
+          }}
+        />
+        {isOpen && (
+          <ChipGroup
+            {...{
+              sort,
+              sex,
+              event,
+              setSort,
+              setSex,
+              setEvent,
+            }}
+          />
+        )}
         <Button
           className={$['detail-search']}
           leftSection={
