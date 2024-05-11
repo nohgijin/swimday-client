@@ -1,29 +1,28 @@
-'use client'
 import $ from './style.module.scss'
-import { ActionIcon, Input } from '@mantine/core'
 import Back from '@/assets/back.svg'
-import Link from 'next/link'
+import { ActionIcon, Input } from '@mantine/core'
+import { Dispatch, SetStateAction } from 'react'
 import Search from '@/assets/search.svg'
-import { useQueryState } from 'nuqs'
-import { useState } from 'react'
-import SearchInput from '@/components/SearchInput'
+import { parseAsString, useQueryStates } from 'nuqs'
 
-function Page() {
-  const [name, setName] = useState(useQueryState('name'))
-  const [isClickInput, setIsClickInput] = useState(false)
+type Props = {
+  setIsClickInput: Dispatch<SetStateAction<boolean>>
+}
 
-  if (isClickInput) {
-    return <SearchInput {...{ setIsClickInput }} />
-  }
-
+function SearchInput({ setIsClickInput }: Props) {
+  const [queries, setQueries] = useQueryStates({
+    sort: parseAsString,
+    sex: parseAsString,
+    event: parseAsString,
+    name: parseAsString,
+  })
   return (
-    <section className={$.result}>
+    <div className={$['search-input']}>
       <div className={$['input-wrapper']}>
         <ActionIcon
-          component={Link}
           className={$.back}
           variant={'transparent'}
-          href={'/'}
+          onClick={() => setIsClickInput(false)}
         >
           <Back width={24} height={24} />
         </ActionIcon>
@@ -36,12 +35,13 @@ function Page() {
               <Search width={16} height={16} />
             </ActionIcon>
           }
-          value={name}
+          value={queries.name}
+          onChange={(e) => setQueries({ name: e.currentTarget.value })}
           onClick={() => setIsClickInput(true)}
         />
       </div>
-    </section>
+    </div>
   )
 }
 
-export default Page
+export default SearchInput
