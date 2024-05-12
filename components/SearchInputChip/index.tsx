@@ -10,6 +10,7 @@ type Props = {
   setIsClickInput: Dispatch<SetStateAction<boolean>>
 }
 
+// TODO: 검색->칩선택 시 url과 칩 상태 동기화 안되는 문제 해결해야함
 function SearchInputChip({ setIsClickInput }: Props) {
   const [queries, setQueries] = useQueryStates(
     {
