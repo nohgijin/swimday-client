@@ -11,6 +11,14 @@ const nextConfig = {
       },
     ]
   },
+  async rewrites(){
+    return [
+      {
+        source:'/api/:path*',
+        destination:'https://morning-badlands-42969-319cd5b52254.herokuapp.com/api/:path'
+      }
+    ]
+  },
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
     prependData: `@import "styles/color.scss"; @import "styles/typo.scss";`,

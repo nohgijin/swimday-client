@@ -7,10 +7,14 @@ import Search from '@/assets/search.svg'
 import { useQueryState } from 'nuqs'
 import { useState } from 'react'
 import SearchInput from '@/components/SearchInputChip'
+import {getDehydratedQuery, Hydrate} from "@/utils/react-query";
+import queryOptions from "@/service/competition/queries";
 
-function Page() {
+async function Page() {
   const [name, setName] = useQueryState('name')
   const [isClickInput, setIsClickInput] = useState(false)
+    const { queryKey, queryFn } = queryOptions.all();
+    const query = await getDehydratedQuery({ queryKey, queryFn });
 
   if (isClickInput) {
     return <SearchInput {...{ setIsClickInput }} />
@@ -40,6 +44,11 @@ function Page() {
           onClick={() => setIsClickInput(true)}
         />
       </div>
+
+        <Hydrate state={{queries:[query]}}>
+
+
+        </Hydrate>
     </section>
   )
 }

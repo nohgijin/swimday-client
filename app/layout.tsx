@@ -2,6 +2,7 @@ import './layout.scss'
 import localFont from 'next/font/local'
 import { ColorSchemeScript, MantineProvider } from '@mantine/core'
 import '@mantine/core/styles.css'
+import ReactQueryProviders from '@/hooks/useReactQuery'
 
 const font = localFont({
   src: '../fonts/Pretendard-Regular.woff2',
@@ -20,7 +21,9 @@ export default function RootLayout({
         <ColorSchemeScript />
       </head>
       <body>
-        <MantineProvider>{children}</MantineProvider>
+          <ReactQueryProviders>
+            <MantineProvider>{children}</MantineProvider>
+          </ReactQueryProviders>
       </body>
     </html>
   )

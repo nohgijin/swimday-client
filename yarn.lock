@@ -1340,6 +1340,18 @@
   resolved "https://registry.npmjs.org/@tanstack/query-core/-/query-core-5.36.0.tgz"
   integrity sha512-B5BD3pg/mztDR36i77hGcyySKKeYrbM5mnogOROTBi1SUml5ByRK7PGUUl16vvubvQC+mSnqziFG/VIy/DE3FQ==
 
+"@tanstack/query-devtools@5.32.1":
+  version "5.32.1"
+  resolved "https://registry.npmjs.org/@tanstack/query-devtools/-/query-devtools-5.32.1.tgz"
+  integrity sha512-7Xq57Ctopiy/4atpb0uNY5VRuCqRS/1fi/WBCKKX6jHMa6cCgDuV/AQuiwRXcKARbq2OkVAOrW2v4xK9nTbcCA==
+
+"@tanstack/react-query-devtools@^5.36.0":
+  version "5.36.0"
+  resolved "https://registry.npmjs.org/@tanstack/react-query-devtools/-/react-query-devtools-5.36.0.tgz"
+  integrity sha512-AxZSmM7CmjDQrcY9gceFBS+1DqkfTqAMpDCMltzIxMKvKn+ZhgBsV49aewhVXP1DgZzb+Is4f9HH2EMu//njXw==
+  dependencies:
+    "@tanstack/query-devtools" "5.32.1"
+
 "@tanstack/react-query@^5.36.0":
   version "5.36.0"
   resolved "https://registry.npmjs.org/@tanstack/react-query/-/react-query-5.36.0.tgz"
