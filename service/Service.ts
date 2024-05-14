@@ -41,7 +41,7 @@ class Service {
     private headers: Record<string, string>;
 
     constructor() {
-        this.baseURL = `${process.env.NEXT_PUBLIC_BASE_URL}/api`;
+        this.baseURL = `https://morning-badlands-42969-319cd5b52254.herokuapp.com/api`;
         this.headers = {
             csrf: 'token',
             Referer: this.baseURL,

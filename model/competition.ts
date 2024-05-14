@@ -5,5 +5,5 @@ export type Competition = {
     location:string;
     meter:number;
     documentation:string;
-    detph:number;
+    depth:number;
 }

@@ -6,7 +6,7 @@ import {
     QueryKey
 } from '@tanstack/react-query';
 import { cache } from 'react';
-import {isEqual} from "@/utils/index";
+import { isEqual } from '@/utils';
 
 
 export const getQueryClient = cache(() => new QueryClient());
