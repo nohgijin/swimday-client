@@ -10,6 +10,7 @@ import SearchInput from '@/components/SearchInputChip'
 import {getDehydratedQuery, Hydrate} from "@/utils/react-query";
 import queryOptions from "@/service/competition/queries";
 import SearchList from "@/components/SearchList";
+import FilterGroup from "@/components/FilterGroup";
 
 function Page() {
   const [name, setName] = useQueryState('name')
@@ -43,6 +44,7 @@ function Page() {
           onClick={() => setIsClickInput(true)}
         />
       </div>
+        <FilterGroup />
 
           <SearchList />
     </section>
