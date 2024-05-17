@@ -9,7 +9,7 @@ import { useState } from 'react'
 import SearchInput from '@/components/SearchInputChip'
 import {getDehydratedQuery, Hydrate} from "@/utils/react-query";
 import queryOptions from "@/service/competition/queries";
-import SearchList from "@/components/SearchList";
+import Result from "@/components/Result";
 import FilterGroup from "@/components/FilterGroup";
 
 function Page() {
@@ -46,7 +46,7 @@ function Page() {
       </div>
         <FilterGroup />
 
-          <SearchList />
+          <Result />
     </section>
   )
 }
