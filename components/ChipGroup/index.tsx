@@ -59,6 +59,7 @@ export const FILTERS = [
   ],
 ]
 
+//TODO: 그룹칩해야함. 지금 타입 하나도 안맞음.
 function ChipGroup() {
   const { queryParams,setQueryParams  } = useQueryParams<{sort:string,gender:string,event:string}>();
   const sort = queryParams.get('sort')
