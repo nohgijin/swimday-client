@@ -1,7 +1,8 @@
 .result {
   height: 100vh;
   padding: 12px 24px 24px;
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
   background: $background-40;
 
   .input-wrapper {
