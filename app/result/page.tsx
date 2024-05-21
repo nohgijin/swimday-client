@@ -6,7 +6,6 @@ import Link from 'next/link'
 import Search from '@/assets/search.svg'
 import { useQueryState } from 'nuqs'
 import { useState } from 'react'
-import SearchInput from '@/components/SearchInputChip'
 import {getDehydratedQuery, Hydrate} from "@/utils/react-query";
 import queryOptions from "@/service/competition/queries";
 import Result from "@/components/Result";
@@ -14,11 +13,6 @@ import FilterGroup from "@/components/FilterGroup";
 
 function Page() {
   const [name, setName] = useQueryState('name')
-  const [isClickInput, setIsClickInput] = useState(false)
-
-  if (isClickInput) {
-    return <SearchInput {...{ setIsClickInput }} />
-  }
 
   return (
     <section className={$.result}>
@@ -41,7 +35,6 @@ function Page() {
             </ActionIcon>
           }
           value={name}
-          onClick={() => setIsClickInput(true)}
         />
       </div>
         <FilterGroup />

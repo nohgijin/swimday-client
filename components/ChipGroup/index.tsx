@@ -1,6 +1,8 @@
 import { Chip } from '@mantine/core'
 import $ from './style.module.scss'
-import { Dispatch, SetStateAction } from 'react'
+import {Dispatch, SetStateAction, useState} from 'react'
+import {parseAsString, useQueryStates} from "nuqs";
+import {useQueryParams} from "@/utils/useQueryParams";
 
 export const FILTERS = [
   [
@@ -57,39 +59,17 @@ export const FILTERS = [
   ],
 ]
 
-type Props = {
-  sort: string
-  sex: string[]
-  event: string[]
-  setSort: Dispatch<SetStateAction<string>>
-  setSex: Dispatch<SetStateAction<string[]>>
-  setEvent: Dispatch<SetStateAction<string[]>>
-}
-
-function ChipGroup({ sort, sex, event, setSort, setSex, setEvent }: Props) {
-  const handleAllChange = (value: boolean, kind: 'SEX' | 'EVENT') => {
-    const setValue = kind === 'SEX' ? setSex : setEvent
-    if (!value) {
-      return setValue([])
-    }
-    if (kind === 'SEX') {
-      const allValue = FILTERS[1].map(({ value }) => value)
-      setSex(allValue)
-      return
-    }
-
-    const allValue = [
-      ...FILTERS[2].map(({ value }) => value),
-      ...FILTERS[3].map(({ value }) => value),
-    ]
-    setEvent(allValue)
-  }
+function ChipGroup() {
+  const { queryParams,setQueryParams  } = useQueryParams<{sort:string,gender:string,event:string}>();
+  const sort = queryParams.get('sort')
+  const gender = queryParams.get('gender')
+  const event = queryParams.get('event')
 
   return (
     <>
       <div className={$.title}>정렬</div>
       <div className={$['chip-group']}>
-        <Chip.Group onChange={(value) => setSort(value)}>
+        <Chip.Group onChange={(value) => setQueryParams({sort: value})}>
           {FILTERS[0].map(({ label, value }) => (
             <Chip
               className={$.chip}
@@ -104,21 +84,13 @@ function ChipGroup({ sort, sex, event, setSort, setSex, setEvent }: Props) {
       </div>
       <div className={$.title}>성별</div>
       <div className={$['chip-group']}>
-        <Chip
-          className={$.chip}
-          value={'all'}
-          checked={sex.length === FILTERS[1].length}
-          onChange={(value) => handleAllChange(value, 'SEX')}
-        >
-          전체
-        </Chip>
-        <Chip.Group multiple value={sex} onChange={(value) => setSex(value)}>
+        <Chip.Group multiple value={gender||[]} onChange={(value) => setQueryParams({gender: value})}>
           {FILTERS[1].map(({ label, value }) => (
             <Chip
               className={$.chip}
               key={value}
               value={value}
-              checked={sex.includes(value)}
+              checked={gender?.includes(value)}
             >
               {label}
             </Chip>
@@ -127,18 +99,10 @@ function ChipGroup({ sort, sex, event, setSort, setSex, setEvent }: Props) {
       </div>
       <div className={$.title}>종목</div>
       <div className={$['chip-group']} style={{ flexDirection: 'column' }}>
-        <Chip
-          className={$.chip}
-          value={'all'}
-          checked={event.length === FILTERS[2].length + FILTERS[3].length}
-          onChange={(value) => handleAllChange(value, 'EVENT')}
-        >
-          전체
-        </Chip>
         <Chip.Group
           multiple
-          value={event}
-          onChange={(value) => setEvent(value)}
+          value={event||[]}
+          onChange={(value) => setQueryParams({event: value})}
         >
           <div className={$['personal-event']}>
             {FILTERS[2].map(({ label, value }) => (
@@ -146,7 +110,7 @@ function ChipGroup({ sort, sex, event, setSort, setSex, setEvent }: Props) {
                 className={$.chip}
                 key={value}
                 value={value}
-                checked={event.includes(value)}
+                checked={event?.includes(value)}
               >
                 {label}
               </Chip>
@@ -158,7 +122,7 @@ function ChipGroup({ sort, sex, event, setSort, setSex, setEvent }: Props) {
                 className={$.chip}
                 key={value}
                 value={value}
-                checked={event.includes(value)}
+                checked={event?.includes(value)}
               >
                 {label}
               </Chip>

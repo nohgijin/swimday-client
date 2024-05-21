@@ -18,13 +18,6 @@ const TABS = [
 ]
 
 function Page() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [sort, setSort] = useState('new')
-  const [sex, setSex] = useState(FILTERS[1].map(({ value }) => value))
-  const [event, setEvent] = useState([
-    ...FILTERS[2].map(({ value }) => value),
-    ...FILTERS[3].map(({ value }) => value),
-  ])
   const [name, setName] = useState('')
 
   const router = useRouter()
@@ -42,7 +35,7 @@ function Page() {
             <ActionIcon
               variant={'transparent'}
               component={Link}
-              href={`/result?sort=${sort}&sex=${sex.toString()}&event=${event.toString()}&name=${name}`}
+              href={`/result?name=${name}`}
             >
               <Search width={16} height={16} />
             </ActionIcon>
@@ -51,7 +44,7 @@ function Page() {
           onKeyDown={(e) => {
             if (e.code === 'Enter') {
               router.push(
-                `/result?sort=${sort}&sex=${sex.toString()}&event=${event.toString()}&name=${name}`,
+                `/result?name=${name}`,
               )
             }
           }}
@@ -59,33 +52,6 @@ function Page() {
             setName(e.currentTarget.value)
           }}
         />
-        {isOpen && (
-          <ChipGroup
-            {...{
-              sort,
-              sex,
-              event,
-              setSort,
-              setSex,
-              setEvent,
-            }}
-          />
-        )}
-        <Button
-          className={$['detail-search']}
-          leftSection={
-            isOpen ? (
-              <Close width={12} height={12} />
-            ) : (
-              <Plus width={12} height={12} />
-            )
-          }
-          variant={'transparent'}
-          color={color['$text-black-30']}
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          상세검색 {isOpen ? '닫기' : '열기'}
-        </Button>
       </div>
     </main>
   )
