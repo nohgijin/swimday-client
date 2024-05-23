@@ -1,0 +1,34 @@
+.result-item {
+  display: flex;
+  flex-direction: column;
+  background: $background-50;
+  border-radius: 12px;
+  padding: 24px;
+
+  .team {
+    margin-bottom: 8px;
+  }
+
+  .name {
+    margin-bottom: 16px;
+  }
+
+  .infos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+
+    .info {
+      padding: 8px 12px;
+      background: $background-30;
+      border-radius: 4px;
+    }
+  }
+
+  .result {
+    margin-left: auto;
+    @include typo-semi-h2();
+    color: $text-black-10;
+  }
+}

@@ -27,8 +27,8 @@ dd {
 }
 
 /* list를 role값으로 갖는 ul, ol 요소의 기본 목록 스타일을 제거합니다. */
-ul[role='list'],
-ol[role='list'] {
+ul[role="list"],
+ol[role="list"] {
   list-style: none;
 }
 
@@ -49,6 +49,9 @@ label {
   line-height: 1.1;
 }
 
+a {
+  all: unset;
+}
 
 /* 클래스가 없는 기본 a 태그 요소는 기본 스타일을 가져옵니다. */
 a:not([class]) {

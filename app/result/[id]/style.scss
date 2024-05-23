@@ -1,0 +1,15 @@
+.result-detail-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 12px 24px;
+  background: $background-50;
+
+  .mantine-ActionIcon-root {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: auto;
+    margin-right: auto;
+  }
+}

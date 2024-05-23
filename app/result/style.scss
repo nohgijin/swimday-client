@@ -12,7 +12,6 @@
     .back {
       width: 48px;
       height: 48px;
-      padding: 12px;
     }
 
     .mantine-Input-wrapper {
@@ -28,5 +27,11 @@
         right: 24px;
       }
     }
+  }
+
+  .results {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
   }
 }
