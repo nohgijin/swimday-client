@@ -1,7 +1,6 @@
 import { Chip } from "@mantine/core";
 import $ from "./style.module.scss";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { parseAsString, useQueryStates } from "nuqs";
+import { useEffect } from "react";
 import { useQueryParams } from "@/utils/useQueryParams";
 import { useChipStore } from "@/store/useChipStore";
 
