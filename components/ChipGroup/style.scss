@@ -1,0 +1,45 @@
+.chip-group {
+  .title {
+    @include typo-regular-body2();
+    margin-bottom: 8px;
+  }
+
+  .group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 36px;
+
+    .personal-event,
+    .team-event {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.mantine-Chip-root {
+  .mantine-Chip-label {
+    height: 44px;
+    padding: 8px 16px;
+    border-radius: 30px;
+    background: $status-selected-n;
+    @include typo-regular-body1();
+
+    &[data-checked="true"] {
+      background: $status-selected-y;
+      color: $text-blue-10;
+
+      svg {
+        path {
+          fill: $text-blue-10;
+        }
+      }
+    }
+  }
+}

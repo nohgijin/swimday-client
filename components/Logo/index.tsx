@@ -1,7 +1,7 @@
-import $ from "./style.module.scss";
+import "./style.scss";
 
 function Logo() {
-  return <div className={$.logo}>로고</div>;
+  return <div className="logo">로고</div>;
 }
 
 export default Logo;

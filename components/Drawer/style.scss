@@ -1,21 +1,38 @@
-.mantine-Drawer-header{
-    padding:24px;
-    border-radius: 12px 12px 0 0;
-    .mantine-Drawer-title{
+.mantine-Drawer-header {
+  padding: 24px;
+  border-radius: 12px 12px 0 0;
+  .mantine-Drawer-title {
     @include typo-semi-h2();
-        color:$text-black-20;
+    color: $text-black-20;
+  }
+  svg {
+    path {
+      fill: $text-black-30;
     }
-    svg{
-        path {
-            fill: $text-black-30;
-        }
-    }
+  }
 }
 
-.mantine-Drawer-content{
-    .title{
-        @include typo-regular-body2();
-        //color:$text-black-20;
-        color:red;
-    }
+.mantine-Drawer-body {
+  padding: 0 24px;
+}
+
+.mantine-Drawer-content {
+  height: 360px;
+
+  .title {
+    @include typo-regular-body2();
+  }
+}
+
+.button-wrapper {
+  position: sticky;
+  bottom: 0;
+  padding: 16px 0;
+  background: $background-50;
+
+  .mantine-Button-root {
+    background: $status-activated-primary;
+    border-radius: 12px;
+    width: 100%;
+  }
 }

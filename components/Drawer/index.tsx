@@ -1,9 +1,6 @@
 import "./style.scss";
-import { CloseIcon, Drawer as MantineDrawer } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
+import { Button, CloseIcon, Drawer as MantineDrawer } from "@mantine/core";
 import ChipGroup from "@/components/ChipGroup";
-import { parseAsString, useQueryStates } from "nuqs";
-import { useState } from "react";
 import { useChipStore } from "@/store/useChipStore";
 import { useQueryParams } from "@/utils/useQueryParams";
 
@@ -17,13 +14,15 @@ function Drawer({ opened, close }: Props) {
   const { sort, gender, event } = store;
   const { setQueryParams } = useQueryParams<{ sort: string; gender: string; event: string }>();
 
+  const handleClose = () => {
+    close();
+    setQueryParams({ sort, gender: gender.toString(), event: event.toString() });
+  };
+
   return (
     <MantineDrawer
       opened={opened}
-      onClose={() => {
-        close();
-        setQueryParams({ sort, gender: gender.toString(), event: event.toString() });
-      }}
+      onClose={handleClose}
       title="필터"
       position={"bottom"}
       closeButtonProps={{
@@ -31,6 +30,9 @@ function Drawer({ opened, close }: Props) {
       }}
     >
       <ChipGroup />
+      <div className={"button-wrapper"}>
+        <Button onClick={handleClose}>적용하기</Button>
+      </div>
     </MantineDrawer>
   );
 }

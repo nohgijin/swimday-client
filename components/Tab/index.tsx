@@ -1,21 +1,24 @@
 "use client";
 
 import { Tabs } from "@mantine/core";
-import $ from "./style.module.scss";
-import { parseAsString, useQueryState } from "nuqs";
+import { useQueryParams } from "@/utils/useQueryParams";
+import "./style.scss";
 
 type Props = {
-  values: { target: string; label: string }[];
+  values: { query: string; label: string }[];
 };
 
 function Tab({ values }: Props) {
-  const [targetValue, setTargetValue] = useQueryState("target", parseAsString.withDefault("record"));
+  const { queryParams, setQueryParams } = useQueryParams<{
+    tab: string;
+  }>();
+  const tab = queryParams.get("tab") || "record";
 
   return (
-    <Tabs variant="unstyled" className={$.tabs} value={targetValue || ""} onChange={(value) => setTargetValue(value)}>
-      <Tabs.List className={$["tab-list"]}>
+    <Tabs variant="unstyled" value={tab} onChange={(value) => setQueryParams({ tab: value || "record" })}>
+      <Tabs.List>
         {values.map((value) => (
-          <Tabs.Tab className={$.tab} value={value.target} key={value.target}>
+          <Tabs.Tab value={value.query} key={value.query}>
             {value.label}
           </Tabs.Tab>
         ))}

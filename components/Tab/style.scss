@@ -1,14 +1,13 @@
-.tabs {
+.mantine-Tabs-root {
   position: relative;
 
-
-  .tab-list {
+  .mantine-Tabs-list {
     display: flex;
     justify-content: center;
     width: 100%;
   }
 
-  .tab {
+  .mantine-Tabs-tab {
     width: 50%;
     @include typo-regular-body1();
 

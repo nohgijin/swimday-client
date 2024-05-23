@@ -5,7 +5,7 @@ import Search from "@/assets/search.svg";
 import ChipGroup from "@/components/ChipGroup";
 import { useChipStore } from "@/store/useChipStore";
 import { useQueryParams } from "@/utils/useQueryParams";
-import $ from "./style.module.scss";
+import "./style.scss";
 
 type Props = {
   setIsClickInput: Dispatch<SetStateAction<boolean>>;
@@ -13,9 +13,14 @@ type Props = {
 
 function SearchInputChipGroup({ setIsClickInput }: Props) {
   const store = useChipStore();
-  const [name, setName] = useState("");
   const { sort, gender, event } = store;
-  const { setQueryParams } = useQueryParams<{ sort: string; gender: string; event: string }>();
+  const { queryParams, setQueryParams } = useQueryParams<{
+    name: string;
+    sort: string;
+    gender: string;
+    event: string;
+  }>();
+  const [name, setName] = useState(queryParams.get("name") || "");
 
   const handleSearch = () => {
     setIsClickInput(false);
@@ -23,13 +28,13 @@ function SearchInputChipGroup({ setIsClickInput }: Props) {
   };
 
   return (
-    <div className={$["search-input-chip"]}>
-      <div className={$["search-input"]}>
-        <ActionIcon className={$.back} variant={"transparent"} onClick={() => setIsClickInput(false)}>
+    <div className="search-input-chip-group">
+      <div className={"input-wrapper"}>
+        <ActionIcon className={"back"} variant={"transparent"} onClick={() => setIsClickInput(false)}>
           <Back width={24} height={24} />
         </ActionIcon>
         <Input
-          className={$.input}
+          autoFocus={true}
           placeholder="선수/대회 검색하기"
           rightSectionPointerEvents={"all"}
           rightSection={

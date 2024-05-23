@@ -1,5 +1,5 @@
 import { Chip } from "@mantine/core";
-import $ from "./style.module.scss";
+import "./style.scss";
 import { useEffect } from "react";
 import { useQueryParams } from "@/utils/useQueryParams";
 import { useChipStore } from "@/store/useChipStore";
@@ -75,47 +75,47 @@ function ChipGroup() {
   }, []);
 
   return (
-    <>
-      <div className={$.title}>정렬</div>
-      <div className={$["chip-group"]}>
+    <div className={"chip-group"}>
+      <div className={"title"}>정렬</div>
+      <div className="group">
         <Chip.Group multiple={false} onChange={(value) => setSort(value)}>
           {FILTERS[0].map(({ label, value }) => (
-            <Chip className={$.chip} key={value} value={value} checked={sort === value}>
+            <Chip key={value} value={value} checked={sort === value}>
               {label}
             </Chip>
           ))}
         </Chip.Group>
       </div>
-      <div className={$.title}>성별</div>
-      <div className={$["chip-group"]}>
+      <div className={"title"}>성별</div>
+      <div className="group">
         <Chip.Group multiple value={gender} onChange={(value) => setGender(value)}>
           {FILTERS[1].map(({ label, value }) => (
-            <Chip className={$.chip} key={value} value={value} checked={gender?.includes(value)}>
+            <Chip key={value} value={value} checked={gender?.includes(value)}>
               {label}
             </Chip>
           ))}
         </Chip.Group>
       </div>
-      <div className={$.title}>종목</div>
-      <div className={$["chip-group"]} style={{ flexDirection: "column" }}>
+      <div className={"title"}>종목</div>
+      <div className="group" style={{ flexDirection: "column" }}>
         <Chip.Group multiple value={event} onChange={(value) => setEvent(value)}>
-          <div className={$["personal-event"]}>
+          <div className="personal-event">
             {FILTERS[2].map(({ label, value }) => (
-              <Chip className={$.chip} key={value} value={value} checked={event?.includes(value)}>
+              <Chip key={value} value={value} checked={event?.includes(value)}>
                 {label}
               </Chip>
             ))}
           </div>
-          <div className={$["team-event"]}>
+          <div className="team-event">
             {FILTERS[3].map(({ label, value }) => (
-              <Chip className={$.chip} key={value} value={value} checked={event?.includes(value)}>
+              <Chip key={value} value={value} checked={event?.includes(value)}>
                 {label}
               </Chip>
             ))}
           </div>
         </Chip.Group>
       </div>
-    </>
+    </div>
   );
 }
 

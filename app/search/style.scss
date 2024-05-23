@@ -1,0 +1,34 @@
+.search-page {
+  height: 100vh;
+  background: $background-50;
+
+  .mantine-Input-wrapper {
+    width: 100%;
+
+    .mantine-Input-input {
+      height: 52px;
+      padding: 12px 24px;
+      border-radius: 30px;
+    }
+
+    .mantine-Input-section {
+      right: 24px;
+    }
+  }
+
+  .mantine-Button-root {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    @include typo-regular-tertiary();
+    text-decoration: underline $text-black-30;
+
+    .mantine-Button-section {
+      margin-inline-end: 4px;
+    }
+
+    path {
+      fill: $text-black-30;
+    }
+  }
+}

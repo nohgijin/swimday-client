@@ -1,5 +1,5 @@
 "use client";
-import $ from "./style.module.scss";
+import "./style.scss";
 
 const MOCK_DATA = {
   name: "도영성",
@@ -14,7 +14,7 @@ const MOCK_DATA = {
 };
 
 function Result() {
-  return <div className={$.result}>gdgd</div>;
+  return <div className="result">gdgd</div>;
 }
 
 export default Result;

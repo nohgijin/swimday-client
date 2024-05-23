@@ -1,33 +1,35 @@
 "use client";
 
-import $ from "./style.module.scss";
+import "./style.scss";
 import { ActionIcon, Input } from "@mantine/core";
 import Back from "@/assets/back.svg";
 import Link from "next/link";
 import Search from "@/assets/search.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Result from "@/components/Result";
 import FilterGroup from "@/components/FilterGroup";
 import SearchInputChipGroup from "@/components/SearchInputChipGroup";
 import { useQueryParams } from "@/utils/useQueryParams";
+import Drawer from "@/components/Drawer";
+import { useDisclosure } from "@mantine/hooks";
 
 function Page() {
   const { queryParams } = useQueryParams();
   const name = queryParams.get("name") || "";
   const [isClickInput, setIsClickInput] = useState(false);
+  const [opened, { open, close }] = useDisclosure(false);
 
   if (isClickInput) {
     return <SearchInputChipGroup {...{ setIsClickInput }} />;
   }
 
   return (
-    <section className={$.result}>
-      <div className={$["input-wrapper"]}>
-        <ActionIcon component={Link} className={$.back} variant={"transparent"} href={"/"}>
+    <main className={"result-page"}>
+      <div className={"input-wrapper"}>
+        <ActionIcon component={Link} className={"back"} variant={"transparent"} href={"/"}>
           <Back width={24} height={24} />
         </ActionIcon>
         <Input
-          className={$.input}
           placeholder="선수/대회 검색하기"
           rightSectionPointerEvents={"all"}
           rightSection={
@@ -39,9 +41,10 @@ function Page() {
           onClick={() => setIsClickInput(true)}
         />
       </div>
-      <FilterGroup />
+      <FilterGroup {...{ open }} />
+      {opened && <Drawer opened={opened} close={close} />}
       <Result />
-    </section>
+    </main>
   );
 }
 
