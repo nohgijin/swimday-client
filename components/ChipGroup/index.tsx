@@ -1,8 +1,9 @@
 import { Chip } from "@mantine/core";
 import $ from "./style.module.scss";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { parseAsString, useQueryStates } from "nuqs";
 import { useQueryParams } from "@/utils/useQueryParams";
+import { useChipStore } from "@/store/useChipStore";
 
 export const FILTERS = [
   [
@@ -59,18 +60,26 @@ export const FILTERS = [
   ],
 ];
 
-//TODO: 그룹칩해야함. 지금 타입 하나도 안맞음.
 function ChipGroup() {
-  const { queryParams, setQueryParams } = useQueryParams<{ sort: string; gender: string; event: string }>();
-  const sort = queryParams.get("sort");
-  const gender = queryParams.get("gender");
-  const event = queryParams.get("event");
+  const { queryParams } = useQueryParams();
+  const store = useChipStore();
+  const { sort, gender, event, setSort, setGender, setEvent } = store;
+
+  useEffect(() => {
+    const sortParam = queryParams.get("sort");
+    const genderParam = queryParams.get("gender")?.split(",");
+    const eventParam = queryParams.get("event")?.split(",");
+
+    sortParam && setSort(sortParam);
+    genderParam && setGender(genderParam);
+    eventParam && setEvent(eventParam);
+  }, []);
 
   return (
     <>
       <div className={$.title}>정렬</div>
       <div className={$["chip-group"]}>
-        <Chip.Group onChange={(value) => setQueryParams({ sort: value })}>
+        <Chip.Group multiple={false} onChange={(value) => setSort(value)}>
           {FILTERS[0].map(({ label, value }) => (
             <Chip className={$.chip} key={value} value={value} checked={sort === value}>
               {label}
@@ -80,7 +89,7 @@ function ChipGroup() {
       </div>
       <div className={$.title}>성별</div>
       <div className={$["chip-group"]}>
-        <Chip.Group multiple value={gender || []} onChange={(value) => setQueryParams({ gender: value })}>
+        <Chip.Group multiple value={gender} onChange={(value) => setGender(value)}>
           {FILTERS[1].map(({ label, value }) => (
             <Chip className={$.chip} key={value} value={value} checked={gender?.includes(value)}>
               {label}
@@ -90,7 +99,7 @@ function ChipGroup() {
       </div>
       <div className={$.title}>종목</div>
       <div className={$["chip-group"]} style={{ flexDirection: "column" }}>
-        <Chip.Group multiple value={event || []} onChange={(value) => setQueryParams({ event: value })}>
+        <Chip.Group multiple value={event} onChange={(value) => setEvent(value)}>
           <div className={$["personal-event"]}>
             {FILTERS[2].map(({ label, value }) => (
               <Chip className={$.chip} key={value} value={value} checked={event?.includes(value)}>
