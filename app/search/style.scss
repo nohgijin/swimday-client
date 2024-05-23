@@ -2,8 +2,20 @@
   height: 100vh;
   background: $background-50;
 
+  .search-wrapper {
+    padding: 0 24px;
+
+    .description {
+      margin-bottom: 28px;
+      text-align: center;
+      @include typo-semi-h2();
+      color: $text-black-10;
+    }
+  }
+
   .mantine-Input-wrapper {
     width: 100%;
+    margin-bottom: 52px;
 
     .mantine-Input-input {
       height: 52px;

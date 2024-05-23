@@ -38,33 +38,40 @@ function Page() {
     <main className={"search-page"}>
       <Logo />
       <Tab values={TABS} />
-      <Input
-        placeholder="선수/대회 검색하기"
-        rightSectionPointerEvents={"all"}
-        rightSection={
-          <ActionIcon variant={"transparent"} component={"div"} onClick={handleSearch}>
-            <Search width={16} height={16} />
-          </ActionIcon>
-        }
-        value={name}
-        onKeyDown={(e) => {
-          if (e.code === "Enter") {
-            handleSearch();
+      <div className="search-wrapper">
+        <div className="description">
+          기록을 확인하고 싶은
+          <br />
+          수영 선수/팀 이름을 적어주세요.
+        </div>
+        <Input
+          placeholder="선수/대회 검색하기"
+          rightSectionPointerEvents={"all"}
+          rightSection={
+            <ActionIcon variant={"transparent"} component={"div"} onClick={handleSearch}>
+              <Search width={16} height={16} />
+            </ActionIcon>
           }
-        }}
-        onChange={(e) => {
-          setName(e.currentTarget.value);
-        }}
-      />
-      {isOpen && <ChipGroup />}
-      <Button
-        leftSection={isOpen ? <Close width={12} height={12} /> : <Plus width={12} height={12} />}
-        variant={"transparent"}
-        color={color["$text-black-30"]}
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        상세검색 {isOpen ? "닫기" : "열기"}
-      </Button>
+          value={name}
+          onKeyDown={(e) => {
+            if (e.code === "Enter") {
+              handleSearch();
+            }
+          }}
+          onChange={(e) => {
+            setName(e.currentTarget.value);
+          }}
+        />
+        {isOpen && <ChipGroup />}
+        <Button
+          leftSection={isOpen ? <Close width={12} height={12} /> : <Plus width={12} height={12} />}
+          variant={"transparent"}
+          color={color["$text-black-30"]}
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          상세검색 {isOpen ? "닫기" : "열기"}
+        </Button>
+      </div>
     </main>
   );
 }
