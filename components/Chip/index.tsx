@@ -1,15 +1,15 @@
-import { useState } from 'react'
-import { Chip as MantineChip } from '@mantine/core'
-import $ from './style.module.scss'
-import Check from '@/assets/check.svg'
+import { useState } from "react";
+import { Chip as MantineChip } from "@mantine/core";
+import $ from "./style.module.scss";
+import Check from "@/assets/check.svg";
 
 type Props = {
-  value: string
-  children: string
-}
+  value: string;
+  children: string;
+};
 
 function Chip({ value, children }: Props) {
-  const [checked, setChecked] = useState(false)
+  const [checked, setChecked] = useState(false);
   return (
     <MantineChip
       icon={<Check width={12} height={12} />}
@@ -20,7 +20,7 @@ function Chip({ value, children }: Props) {
     >
       {children}
     </MantineChip>
-  )
+  );
 }
 
-export default Chip
+export default Chip;
