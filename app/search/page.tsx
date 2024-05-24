@@ -1,16 +1,17 @@
 "use client";
-import Tab from "@/components/Tab";
-import { ActionIcon, Button, Input } from "@mantine/core";
-import Plus from "@/assets/plus.svg";
-import Close from "@/assets/close.svg";
-import color from "@/styles/color";
-import Logo from "@/components/Logo";
-import { useEffect, useState } from "react";
-import ChipGroup from "@/components/ChipGroup";
-import Search from "@/assets/search.svg";
-import { useRouter } from "next/navigation";
-import { useChipStore } from "@/store/useChipStore";
-import "./style.scss";
+import Tab from '@/components/Tab'
+import { ActionIcon, Button, Input } from '@mantine/core'
+import Plus from '@/assets/plus.svg'
+import Close from '@/assets/close.svg'
+import color from '@/styles/color'
+import Logo from '@/components/Logo'
+import { useEffect, useState } from 'react'
+import ChipGroup from '@/components/ChipGroup'
+import Search from '@/assets/search.svg'
+import { useRouter } from 'next/navigation'
+import { useChipStore } from '@/store/useChipStore'
+import './style.scss'
+import { useCompetitions } from '@/service/competition/useCompetitionService'
 
 const TABS = [
   { query: "record", label: "기록 검색" },
@@ -23,6 +24,9 @@ function Page() {
   const store = useChipStore();
   const { sort, gender, event, setSort, setGender, setEvent } = store;
   const router = useRouter();
+  const a = useCompetitions()
+
+  console.log(a, '대회')
 
   useEffect(() => {
     setSort("new");
