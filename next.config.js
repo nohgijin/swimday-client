@@ -15,8 +15,7 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        // destination: `http://localhost:1337/api/:path*`,
-        destination: 'https://morning-badlands-42969-319cd5b52254.herokuapp.com/api/:path',
+        destination: 'https://morning-badlands-42969-319cd5b52254.herokuapp.com/api/:path*',
       },
     ]
   },
