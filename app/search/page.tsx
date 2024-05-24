@@ -26,10 +26,6 @@ function Page() {
   const router = useRouter()
   const a = useCompetitions()
 
-  console.log(process.env.NEXT_PUBLIC_TOKEN, '토큰값')
-
-  console.log(a, '대회')
-
   useEffect(() => {
     setSort('new')
     setGender([])
