@@ -1,9 +1,11 @@
 .mantine-Drawer-header {
   padding: 24px;
+
   .mantine-Drawer-title {
     @include typo-semi-h2();
     color: $text-black-20;
   }
+
   svg {
     path {
       fill: $text-black-30;
@@ -16,7 +18,7 @@
 }
 
 .mantine-Drawer-content {
-  height: 360px;
+  height: auto;
   border-radius: 12px 12px 0 0;
 
   .title {
