@@ -28,7 +28,7 @@ class Service {
       csrf: 'token',
       Referer: this.baseURL,
       Authorization:
-        `Basic ${process.env.TOKEN}`,
+        `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
     }
     this.http = {
       get: this.get.bind(this),
