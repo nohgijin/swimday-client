@@ -13,6 +13,7 @@ import Drawer from "@/components/Drawer";
 import { useDisclosure } from "@mantine/hooks";
 import { PersonSearchResultItem, TeamSearchResultItem } from "@/components/SearchResultItem";
 import DuplicateResult from "@/components/DuplicateResult";
+import { PersonProps, TeamProps } from "@/components/SearchResultItem";
 
 const PERSON_MOCK_DATA = [
   {
@@ -74,8 +75,6 @@ function Page() {
 
   const MOCK_DATA = isTeam ? TEAM_MOCK_DATA : PERSON_MOCK_DATA;
 
-  console.log({ isDuplicate });
-
   useEffect(() => {
     if (isDuplicate !== undefined) {
       setQueryParams({ isDuplicate: true });
@@ -112,9 +111,14 @@ function Page() {
       {opened && <Drawer {...{ opened, close }} />}
       <div className="results">
         {MOCK_DATA.map((data) => {
-          const Component = isTeam ? TeamSearchResultItem : PersonSearchResultItem;
-
-          return <Component key={data.id} {...{ data }} />;
+          if (isTeam) {
+            const itemData = data as TeamProps;
+            const { id, name, team, ranking, member, gold, silver, bronze } = itemData;
+            return <TeamSearchResultItem {...{ id, name, team, ranking, member, gold, silver, bronze }} />;
+          }
+          const itemData = data as PersonProps;
+          const { id, name, team, event, result, ranking, sex, age, isFin, meter } = itemData;
+          return <PersonSearchResultItem {...{ id, name, team, event, result, ranking, sex, age, isFin, meter }} />;
         })}
       </div>
     </main>

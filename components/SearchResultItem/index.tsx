@@ -2,35 +2,31 @@
 import "./style.scss";
 import Link from "next/link";
 
-type PersonProps = {
-  data: {
-    id: number;
-    name: string;
-    team: string;
-    event: string;
-    result: string;
-    ranking: number;
-    sex: string;
-    age: number;
-    isFin: boolean;
-    meter: number;
-  };
+export type PersonProps = {
+  id: number;
+  name: string;
+  team: string;
+  event: string;
+  result: string;
+  ranking: number;
+  sex: string;
+  age: number;
+  isFin: boolean;
+  meter: number;
 };
 
-type TeamProps = {
-  data: {
-    id: number;
-    name: string;
-    team: string;
-    ranking: number;
-    member: number;
-    gold: number;
-    silver: number;
-    bronze: number;
-  };
+export type TeamProps = {
+  id: number;
+  name: string;
+  team: string;
+  ranking: number;
+  member: number;
+  gold: number;
+  silver: number;
+  bronze: number;
 };
 
-function TeamSearchResultItem({ data: { id, name, team, ranking, member, gold, silver, bronze } }: TeamProps) {
+function TeamSearchResultItem({ id, name, team, ranking, member, gold, silver, bronze }: TeamProps) {
   return (
     <Link className="result-item" href={`/result/${id}`}>
       <div className={"team"}>{team}</div>
@@ -40,9 +36,7 @@ function TeamSearchResultItem({ data: { id, name, team, ranking, member, gold, s
   );
 }
 
-function PersonSearchResultItem({
-  data: { id, name, team, event, result, ranking, sex, age, isFin, meter },
-}: PersonProps) {
+function PersonSearchResultItem({ id, name, team, event, result, ranking, sex, age, isFin, meter }: PersonProps) {
   const infos = [sex === "male" ? "남자" : "여자", `성인부 ${age}그룹`, `${event} ${meter}m`, isFin ? "핀경기" : ""];
   const results = `${result} ${ranking === -1 ? "(번외)" : `(${ranking}위)`}`;
 
