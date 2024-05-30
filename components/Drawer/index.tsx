@@ -11,7 +11,6 @@ type Props = {
 
 function Drawer({ opened, close }: Props) {
   const { queryParams } = useQueryParams();
-  const isTeam = !!queryParams.get("team") || false;
   const store = useChipStore();
   const { sort, gender, event } = store;
   const { setQueryParams } = useQueryParams<{ sort: string; gender: string; event: string }>();
@@ -31,7 +30,7 @@ function Drawer({ opened, close }: Props) {
         icon: <CloseIcon width={16} height={16} />,
       }}
     >
-      <ChipGroup {...{ isTeam }} />
+      <ChipGroup />
       <div className={"button-wrapper"}>
         <Button onClick={handleClose}>적용하기</Button>
       </div>

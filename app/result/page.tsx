@@ -7,13 +7,14 @@ import Link from "next/link";
 import Search from "@/assets/search.svg";
 import { useEffect, useState } from "react";
 import FilterGroup from "@/components/FilterGroup";
-import SearchInputChipGroup from "@/components/SearchInputChipGroup";
 import { useQueryParams } from "@/utils/useQueryParams";
 import Drawer from "@/components/Drawer";
 import { useDisclosure } from "@mantine/hooks";
 import { PersonSearchResultItem, TeamSearchResultItem } from "@/components/SearchResultItem";
 import DuplicateResult from "@/components/DuplicateResult";
 import { PersonProps, TeamProps } from "@/components/SearchResultItem";
+import { useRouter } from "next/navigation";
+import SearchInput from "@/components/SearchInput";
 
 const PERSON_MOCK_DATA = [
   {
@@ -67,13 +68,17 @@ const TEAM_MOCK_DATA = [
 
 function Page() {
   const { queryParams, setQueryParams } = useQueryParams<{ isTeam: boolean; isDuplicate: boolean }>();
-  const [isClickInput, setIsClickInput] = useState(false);
   const [opened, { open, close }] = useDisclosure(false);
-  const name = queryParams.get("name") || "";
+  const [name] = useState(queryParams.get("name") || "");
+  const router = useRouter();
   const isTeam = !!queryParams.get("team");
   const isDuplicate = queryParams.get("isDuplicate");
 
   const MOCK_DATA = isTeam ? TEAM_MOCK_DATA : PERSON_MOCK_DATA;
+
+  const handleSearch = () => {
+    router.push(`/result?name=${name}`);
+  };
 
   useEffect(() => {
     if (isDuplicate !== undefined) {
@@ -81,12 +86,8 @@ function Page() {
     }
   }, []);
 
-  if (isClickInput) {
-    return <SearchInputChipGroup {...{ setIsClickInput }} />;
-  }
-
   if (isDuplicate) {
-    return <DuplicateResult {...{ name, setIsClickInput }} />;
+    return <DuplicateResult />;
   }
 
   return (
@@ -95,17 +96,7 @@ function Page() {
         <ActionIcon component={Link} className={"back"} variant={"transparent"} href={"/"}>
           <Back width={24} height={24} />
         </ActionIcon>
-        <Input
-          placeholder="선수/대회 검색하기"
-          rightSectionPointerEvents={"all"}
-          rightSection={
-            <ActionIcon variant={"transparent"}>
-              <Search width={16} height={16} />
-            </ActionIcon>
-          }
-          value={name}
-          onClick={() => setIsClickInput(true)}
-        />
+        <SearchInput />
       </div>
       <FilterGroup {...{ open }} />
       {opened && <Drawer {...{ opened, close }} />}
