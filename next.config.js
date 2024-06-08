@@ -6,7 +6,7 @@ const nextConfig = {
     return [
       {
         source: '/',
-        destination: '/search?tab=record',
+        destination: '/record',
         permanent: true,
       },
     ]

@@ -1,30 +1,30 @@
-"use client";
+'use client'
 
-import { Tabs } from "@mantine/core";
-import { useQueryParams } from "@/utils/useQueryParams";
-import "./style.scss";
+import { Tabs } from '@mantine/core'
+import './style.scss'
+import { usePathname, useRouter } from 'next/navigation'
 
 type Props = {
-  values: { query: string; label: string }[];
+  values: { url: string; label: string }[];
 };
 
 function Tab({ values }: Props) {
-  const { queryParams, setQueryParams } = useQueryParams<{
-    tab: string;
-  }>();
-  const tab = queryParams.get("tab") || "record";
+  const pathname = usePathname().replace('/', '')
+  const router = useRouter()
 
   return (
-    <Tabs variant="unstyled" value={tab} onChange={(value) => setQueryParams({ tab: value || "record" })}>
+    <Tabs variant='unstyled' value={pathname} onChange={(value: string) => {
+      router.push(value)
+    }}>
       <Tabs.List>
         {values.map((value) => (
-          <Tabs.Tab value={value.query} key={value.query}>
+          <Tabs.Tab value={value.url} key={value.url}>
             {value.label}
           </Tabs.Tab>
         ))}
       </Tabs.List>
     </Tabs>
-  );
+  )
 }
 
-export default Tab;
+export default Tab

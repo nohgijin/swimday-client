@@ -68,7 +68,7 @@ function Page() {
   const [name, setName] = useState(queryParams.get('name') || '')
   const [isClickInput, setIsClickInput] = useState(false)
   const [opened, { open, close }] = useDisclosure(false)
-  const [isTeam, setIsTeam] = useState(true)
+  const [isTeam, setIsTeam] = useState(false)
 
   const MOCK_DATA = isTeam ? TEAM_MOCK_DATA : PERSON_MOCK_DATA
   const handleSearch = () => {
@@ -106,7 +106,7 @@ function Page() {
           onClick={() => !isTeam && setIsClickInput(true)}
         />
       </div>
-      <FilterGroup {...{ isTeam, open }} />
+      <FilterGroup type={'record'} {...{ isTeam, open }} />
       {opened && <Drawer {...{ opened, close, isTeam }} />}
       <div className='results'>
         {MOCK_DATA.map((data) => {

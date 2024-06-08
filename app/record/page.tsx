@@ -11,11 +11,10 @@ import Search from '@/assets/search.svg'
 import { useRouter } from 'next/navigation'
 import { useChipStore } from '@/store/useChipStore'
 import './style.scss'
-import { useCompetitions } from '@/service/competition/useCompetitionService'
 
 const TABS = [
-  { query: 'record', label: '기록 검색' },
-  { query: 'schedule', label: '대회 일정' },
+  { url: 'record', label: '기록 검색' },
+  { url: 'schedule', label: '대회 일정' },
 ]
 
 function Page() {
@@ -24,7 +23,6 @@ function Page() {
   const store = useChipStore()
   const { sort, gender, event, setSort, setGender, setEvent } = store
   const router = useRouter()
-  const a = useCompetitions()
 
   useEffect(() => {
     setSort('new')

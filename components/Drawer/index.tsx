@@ -5,7 +5,7 @@ import { useChipStore } from '@/store/useChipStore'
 import { useQueryParams } from '@/utils/useQueryParams'
 
 type Props = {
-  isTeam: boolean;
+  isTeam?: boolean;
   opened: boolean;
   close: () => void;
 };
