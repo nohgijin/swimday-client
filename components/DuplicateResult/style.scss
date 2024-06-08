@@ -1,0 +1,35 @@
+.duplicate-result {
+  width: 100%;
+  height: 100vh;
+  padding: 12px 24px;
+  background: $background-40;
+
+  .input-wrapper {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 64px;
+
+    .back {
+      width: 48px;
+      height: 48px;
+    }
+  }
+
+  .guide {
+    margin-bottom: 94px;
+    @include typo-semi-h2;
+    color: $text-black-10;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+
+    .option {
+      padding: 24px;
+      background: $background-50;
+      border-radius: 12px;
+    }
+  }
+}
