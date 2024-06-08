@@ -107,7 +107,7 @@ function Page() {
         />
       </div>
       <FilterGroup type={'record'} {...{ isTeam, open }} />
-      {opened && <Drawer {...{ opened, close, isTeam }} />}
+      {opened && <Drawer type={'record'} {...{ opened, close, isTeam }} />}
       <div className='results'>
         {MOCK_DATA.map((data) => {
           const Component = isTeam ? TeamResultItem : PersonResultItem

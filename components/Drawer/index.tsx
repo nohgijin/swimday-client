@@ -5,12 +5,13 @@ import { useChipStore } from '@/store/useChipStore'
 import { useQueryParams } from '@/utils/useQueryParams'
 
 type Props = {
+  type: 'schedule' | 'record'
   isTeam?: boolean;
   opened: boolean;
   close: () => void;
 };
 
-function Drawer({ isTeam = false, opened, close }: Props) {
+function Drawer({ type, isTeam = false, opened, close }: Props) {
   const store = useChipStore()
   const { sort, gender, event } = store
   const { setQueryParams } = useQueryParams<{ sort: string; gender: string; event: string }>()
@@ -30,7 +31,7 @@ function Drawer({ isTeam = false, opened, close }: Props) {
         icon: <CloseIcon width={16} height={16} />,
       }}
     >
-      <ChipGroup {...{ isTeam }} />
+      <ChipGroup {...{ type, isTeam }} />
       <div className={'button-wrapper'}>
         <Button onClick={handleClose}>적용하기</Button>
       </div>

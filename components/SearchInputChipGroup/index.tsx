@@ -53,7 +53,7 @@ function SearchInputChipGroup({ setIsClickInput }: Props) {
           }}
         />
       </div>
-      <ChipGroup />
+      <ChipGroup type={'record'} />
     </div>
   );
 }

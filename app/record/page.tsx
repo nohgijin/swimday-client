@@ -62,7 +62,7 @@ function Page() {
             setName(e.currentTarget.value)
           }}
         />
-        {isOpen && <ChipGroup />}
+        {isOpen && <ChipGroup type={'record'} />}
         <Button
           leftSection={isOpen ? <Close width={12} height={12} /> : <Plus width={12} height={12} />}
           variant={'transparent'}

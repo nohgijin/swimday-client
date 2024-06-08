@@ -7,6 +7,8 @@ import FilterGroup from '@/components/FilterGroup'
 import { useDisclosure } from '@mantine/hooks'
 import Drawer from '@/components/Drawer'
 
+
+//ts-pattern
 const TABS = [
   { url: 'record', label: '기록 검색' },
   { url: 'schedule', label: '대회 일정' },
@@ -24,10 +26,8 @@ function Page() {
       <Tab values={TABS} />
       <div className={'schedule-wrapper'}>
         <FilterGroup type={'schedule'} {...{ open }} />
-        {opened && <Drawer {...{ opened, close }} />}
+        {opened && <Drawer type={'schedule'} {...{ opened, close }} />}
       </div>
-
-
     </main>
   )
 }

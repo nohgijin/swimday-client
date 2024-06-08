@@ -60,22 +60,50 @@ export const FILTERS = [
 ]
 
 type Props = {
+  type: 'schedule' | 'record'
   isTeam: boolean
 }
 
-function ChipGroup({ isTeam = false }: Props) {
+function ChipGroup({ type, isTeam = false }: Props) {
   const { queryParams } = useQueryParams()
   const store = useChipStore()
   const { sort, gender, event, setSort, setGender, setEvent } = store
+  const {
+    scheduleSort,
+    location,
+    meter,
+    date,
+    depth,
+    setScheduleSort,
+    setLocation,
+    setMeter,
+    setDate,
+    setDepth,
+  } = store
 
   useEffect(() => {
-    const sortParam = queryParams.get('sort')
-    const genderParam = queryParams.get('gender')?.split(',')
-    const eventParam = queryParams.get('event')?.split(',')
+    if (type === 'record') {
+      const sortParam = queryParams.get('sort')
+      const genderParam = (queryParams.get('gender') || '').split(',')
+      const eventParam = (queryParams.get('event') || '').split(',')
 
-    sortParam && setSort(sortParam)
-    genderParam && setGender(genderParam)
-    eventParam && setEvent(eventParam)
+      sortParam && setSort(sortParam)
+      genderParam && setGender(genderParam)
+      eventParam && setEvent(eventParam)
+    }
+    if (type === 'schedule') {
+      const scheduleSortParam = queryParams.get('scheduleSort')
+      const locationParams = (queryParams.get('location') || '').split(',')
+      const meterParams = (queryParams.get('meter') || '').split(',')
+      const dateParams = queryParams.get('date')
+      const depthParams = (queryParams.get('depth') || '').split(',')
+
+      scheduleSortParam && setScheduleSort(scheduleSortParam)
+      locationParams && setLocation(locationParams)
+      meterParams && setMeter(meterParams)
+      dateParams && setDate(dateParams)
+      depthParams && setDepth(depthParams)
+    }
   }, [])
 
   return (
@@ -102,7 +130,6 @@ function ChipGroup({ isTeam = false }: Props) {
           </Chip.Group>
         </div>
       </>}
-
       {!isTeam && <>
         <div className={'title'}>종목</div>
         <div className='group' style={{ flexDirection: 'column' }}>
