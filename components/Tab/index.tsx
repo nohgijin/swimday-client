@@ -1,21 +1,25 @@
-'use client'
+"use client";
 
-import { Tabs } from '@mantine/core'
-import './style.scss'
-import { usePathname, useRouter } from 'next/navigation'
+import { Tabs } from "@mantine/core";
+import "./style.scss";
+import { usePathname, useRouter } from "next/navigation";
 
 type Props = {
   values: { url: string; label: string }[];
 };
 
 function Tab({ values }: Props) {
-  const pathname = usePathname().replace('/', '')
-  const router = useRouter()
+  const pathname = usePathname().replace("/", "");
+  const router = useRouter();
 
   return (
-    <Tabs variant='unstyled' value={pathname} onChange={(value: string) => {
-      router.push(value)
-    }}>
+    <Tabs
+      variant="unstyled"
+      value={pathname}
+      onChange={(value) => {
+        router.push(`${value}`);
+      }}
+    >
       <Tabs.List>
         {values.map((value) => (
           <Tabs.Tab value={value.url} key={value.url}>
@@ -24,7 +28,7 @@ function Tab({ values }: Props) {
         ))}
       </Tabs.List>
     </Tabs>
-  )
+  );
 }
 
-export default Tab
+export default Tab;

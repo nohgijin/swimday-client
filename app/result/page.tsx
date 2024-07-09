@@ -1,7 +1,7 @@
 "use client";
 
 import "./style.scss";
-import { ActionIcon, Input } from "@mantine/core";
+import { ActionIcon, Button, Input } from "@mantine/core";
 import Back from "@/assets/back.svg";
 import Link from "next/link";
 import Search from "@/assets/search.svg";
@@ -89,11 +89,18 @@ function Page() {
   if (isDuplicate) {
     return <DuplicateResult />;
   }
-
+  //TODO: 뒤로가기 쿼리스트링 안먹음. url을 변경하는 식으로 해야할듯
   return (
     <main className={"result-page"}>
       <div className={"input-wrapper"}>
-        <ActionIcon component={Link} className={"back"} variant={"transparent"} href={"/"}>
+        <ActionIcon
+          component={"button"}
+          className={"back"}
+          variant={"transparent"}
+          onClick={() => {
+            router.back();
+          }}
+        >
           <Back width={24} height={24} />
         </ActionIcon>
         <SearchInput />

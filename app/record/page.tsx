@@ -5,8 +5,8 @@ import "./style.scss";
 import SearchInput from "@/components/SearchInput";
 
 const TABS = [
-  { query: "record", label: "기록 검색" },
-  { query: "schedule", label: "대회 일정" },
+  { url: "record", label: "기록 검색" },
+  { url: "schedule", label: "대회 일정" },
 ];
 
 function Page() {
