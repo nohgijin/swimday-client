@@ -1,13 +1,16 @@
 "use client";
 
-import "./style.scss";
-import { ActionIcon, Button } from "@mantine/core";
-import Back from "@/assets/back.svg";
+import './style.scss'
+import { ActionIcon } from '@mantine/core'
+import Back from '@/assets/back.svg'
+import { useRouter } from 'next/navigation'
 
 function Page({ params: { id } }: { params: { id: string } }) {
+  const router = useRouter()
+
   return (
     <main className={"result-detail-page"}>
-      <ActionIcon variant={"transparent"} onClick={() => window.history.go(-1)}>
+      <ActionIcon variant={"transparent"} onClick={() => router.back()}>
         <Back width={24} height={24} />
       </ActionIcon>
       <div className={"result-detail"}>
