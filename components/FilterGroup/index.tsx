@@ -13,7 +13,7 @@ function FilterGroup({ type, open }: Props) {
   const { queryParams } = useQueryParams<{ isTeam: boolean; sort: string; gender: string; event: string }>()
 
   const teamParams = queryParams.get('isTeam')
-  const sortParams = queryParams.get('sort')?.toString()?.split(',')?.length
+  const sortParams = queryParams.get('sort') || ''
   const genderParamsNumber = queryParams.get('gender')?.toString()?.split(',')?.length
   const eventParamsNumber = queryParams.get('event')?.toString()?.split(',')?.length
 
@@ -21,7 +21,7 @@ function FilterGroup({ type, open }: Props) {
 
   const filterActive = { '정렬': sortParams, '성별': genderParamsNumber, '종목': eventParamsNumber }
 
-  const FILTERS = (() => {
+  const FILTERS_TITLE = (() => {
     if (type === 'schedule') {
       return ['정렬', '지역', '거리', '대회 날짜', '수심']
     }
@@ -39,11 +39,14 @@ function FilterGroup({ type, open }: Props) {
           전체 필터
           <Dropdown width={16} height={16} className={'dropdown-icon'} />
         </div>
-        {FILTERS.map((filter) => {
-          const localActive = filterActive[filter]
+        {FILTERS_TITLE.map((filterTitle) => {
+          const filterContent = filterActive[filterTitle]
+          const sort = { 'new': '최신순', 'old': '오래된순', 'fast': '최고기록순' }
+          
+          const content = filterTitle === '정렬' ? sort[filterContent] : `${filterTitle} ${filterContent}`
           return (
-            <div className={classNames('filter', localActive && 'active')} onClick={open}>
-              {filter}&nbsp;{localActive}
+            <div className={classNames('filter', filterContent && 'active')} onClick={open}>
+              {content}
               <Dropdown width={16} height={16} className={'dropdown-icon'} />
             </div>
           )

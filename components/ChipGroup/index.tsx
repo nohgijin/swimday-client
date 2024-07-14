@@ -84,8 +84,8 @@ function ChipGroup({ type }: Props) {
   useEffect(() => {
     if (type === 'record') {
       const sortParam = queryParams.get('sort')
-      const genderParam = (queryParams.get('gender') || '').split(',')
-      const eventParam = (queryParams.get('event') || '').split(',')
+      const genderParam = queryParams.get('gender') ? (queryParams.get('gender') as string)?.split(',') : []
+      const eventParam = queryParams.get('event') ? (queryParams.get('event') as string)?.split(',') : []
 
       sortParam && setSort(sortParam)
       genderParam && setGender(genderParam)
@@ -121,7 +121,10 @@ function ChipGroup({ type }: Props) {
       {!isTeam && <>
         <div className={'title'}>성별</div>
         <div className='group'>
-          <Chip.Group multiple value={gender} onChange={(value) => setGender(value)}>
+          <Chip.Group multiple value={gender} onChange={(value) => {
+            if (!value.length) return
+            setGender(value)
+          }}>
             {FILTERS[1].map(({ label, value }) => (
               <Chip key={value} value={value} checked={gender?.includes(value)}>
                 {label}
@@ -133,7 +136,10 @@ function ChipGroup({ type }: Props) {
       {!isTeam && <>
         <div className={'title'}>종목</div>
         <div className='group' style={{ flexDirection: 'column' }}>
-          <Chip.Group multiple value={event} onChange={(value) => setEvent(value)}>
+          <Chip.Group multiple value={event} onChange={(value) => {
+            if (!value.length) return
+            setEvent(value)
+          }}>
             <div className='personal-event'>
               {FILTERS[2].map(({ label, value }) => (
                 <Chip key={value} value={value} checked={event?.includes(value)}>
