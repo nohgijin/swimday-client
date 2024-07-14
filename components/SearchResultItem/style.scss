@@ -10,6 +10,8 @@
   }
 
   .name {
+    @include typo-regular-body1;
+    color: $text-black-20;
     margin-bottom: 16px;
   }
 
@@ -23,6 +25,12 @@
       padding: 8px 12px;
       background: $background-30;
       border-radius: 4px;
+      @include typo-regular-body3;
+      color: $text-black-30;
+
+      &:empty {
+        display: none;
+      }
     }
   }
 
