@@ -15,6 +15,17 @@
     background: $background-50;
     cursor: pointer;
 
+    &.active {
+      border: 2px solid $status-activated-primary;
+      color: $status-activated-primary;
+
+      svg {
+        path {
+          fill: $status-activated-primary;
+        }
+      }
+    }
+
     .filter-icon {
       margin-right: 8px;
     }

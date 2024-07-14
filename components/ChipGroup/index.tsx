@@ -61,10 +61,9 @@ export const FILTERS = [
 
 type Props = {
   type: 'schedule' | 'record'
-  isTeam: boolean
 }
 
-function ChipGroup({ type, isTeam = false }: Props) {
+function ChipGroup({ type }: Props) {
   const { queryParams } = useQueryParams()
   const store = useChipStore()
   const { sort, gender, event, setSort, setGender, setEvent } = store
@@ -80,6 +79,8 @@ function ChipGroup({ type, isTeam = false }: Props) {
     setDate,
     setDepth,
   } = store
+  const isTeam = queryParams.get('isTeam')
+
 
   useEffect(() => {
     if (type === 'record') {
@@ -104,13 +105,13 @@ function ChipGroup({ type, isTeam = false }: Props) {
       dateParams && setDate(dateParams)
       depthParams && setDepth(depthParams)
     }
-  }, [])
+  }, [type, isTeam])
 
   return (
     <div className={'chip-group'}>
       <div className={'title'}>정렬</div>
       <div className='group'>
-        <Chip.Group multiple={false} onChange={(value) => setSort(value)}>
+        <Chip.Group onChange={(value) => setSort(value)}>
           {FILTERS[0].map(({ label, value }) => (
             <Chip key={value} value={value} checked={sort === value}>
               {label}
