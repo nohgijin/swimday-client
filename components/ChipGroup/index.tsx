@@ -81,7 +81,6 @@ function ChipGroup({ type }: Props) {
   } = store
   const isTeam = queryParams.get('isTeam')
 
-
   useEffect(() => {
     if (type === 'record') {
       const sortParam = queryParams.get('sort')
@@ -105,7 +104,7 @@ function ChipGroup({ type }: Props) {
       dateParams && setDate(dateParams)
       depthParams && setDepth(depthParams)
     }
-  }, [type, isTeam])
+  }, [])
 
   return (
     <div className={'chip-group'}>

@@ -3,7 +3,7 @@
 import './style.scss'
 import { ActionIcon } from '@mantine/core'
 import Back from '@/assets/back.svg'
-import { useState } from 'react'
+import { useEffect } from 'react'
 import FilterGroup from '@/components/FilterGroup'
 import { useQueryParams } from '@/utils/useQueryParams'
 import Drawer from '@/components/Drawer'
@@ -63,13 +63,28 @@ const TEAM_MOCK_DATA = [
 ]
 
 function Page() {
-  const { queryParams } = useQueryParams<{ isTeam: boolean; }>()
+  const {
+    queryParams,
+    setQueryParams,
+  } = useQueryParams<{ isTeam: boolean; sort: string; gender: string | null; event: string | null }>()
+
   const [opened, { open, close }] = useDisclosure(false)
-  const [name] = useState(queryParams.get('name') || '')
   const router = useRouter()
-  const isTeam = !!queryParams.get('team')
+  const isTeam = !!queryParams.get('isTeam')
 
   const MOCK_DATA = isTeam ? TEAM_MOCK_DATA : PERSON_MOCK_DATA
+
+  useEffect(() => {
+    if (isTeam) {
+      setQueryParams({ sort: 'new', gender: null, event: null })
+      return
+    }
+    setQueryParams({
+      sort: 'new',
+      gender: ['male', 'female'].toString(),
+      event: ['free', 'back', 'breast', 'butterfly', 'im', 'relay', 'imRelay', 'mixedGenderRelay', 'mixedGenderImRelay'].toString(),
+    })
+  }, [])
 
   return (
     <main className={'result-page'}>
