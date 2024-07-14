@@ -8,7 +8,7 @@ import { useDisclosure } from '@mantine/hooks'
 import Drawer from '@/components/Drawer'
 
 
-//ts-pattern
+//TODO: 대회일정 페이지 해야함
 const TABS = [
   { url: 'record', label: '기록 검색' },
   { url: 'schedule', label: '대회 일정' },
