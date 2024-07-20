@@ -4,13 +4,14 @@ import './style.scss'
 import { ActionIcon } from '@mantine/core'
 import Back from '@/assets/back.svg'
 import { useEffect } from 'react'
-import FilterGroup from '@/components/FilterGroup'
+import { ResultFilterGroup } from '@/components/FilterGroup'
 import { useQueryParams } from '@/utils/useQueryParams'
 import Drawer from '@/components/Drawer'
 import { useDisclosure } from '@mantine/hooks'
 import { PersonProps, PersonSearchResultItem, TeamProps, TeamSearchResultItem } from '@/components/SearchResultItem'
 import { useRouter } from 'next/navigation'
 import SearchInput from '@/components/SearchInput'
+import { initialState } from '@/store/useChipStore'
 
 const PERSON_MOCK_DATA = [
   {
@@ -75,14 +76,16 @@ function Page() {
   const MOCK_DATA = isTeam ? TEAM_MOCK_DATA : PERSON_MOCK_DATA
 
   useEffect(() => {
+    const { sort, gender, event } = initialState
+
     if (isTeam) {
-      setQueryParams({ sort: 'new', gender: null, event: null })
+      setQueryParams({ sort, gender: null, event: null })
       return
     }
     setQueryParams({
-      sort: 'new',
-      gender: ['male', 'female'].toString(),
-      event: ['free', 'back', 'breast', 'butterfly', 'im', 'relay', 'imRelay', 'mixedGenderRelay', 'mixedGenderImRelay'].toString(),
+      sort,
+      gender: gender.toString(),
+      event: event.toString(),
     })
   }, [])
 
@@ -101,7 +104,7 @@ function Page() {
         </ActionIcon>
         <SearchInput />
       </div>
-      <FilterGroup {...{ open }} />
+      <ResultFilterGroup {...{ open }} />
       {opened && <Drawer type={'record'} {...{ opened, close }} />}
       <div className='results'>
         {MOCK_DATA.map((data) => {

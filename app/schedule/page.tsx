@@ -3,7 +3,7 @@ import Tab from '@/components/Tab'
 import Logo from '@/components/Logo'
 import { useCompetitions } from '@/service/competition/useCompetitionService'
 import './style.scss'
-import FilterGroup from '@/components/FilterGroup'
+import { ScheduleFilterGroup } from '@/components/FilterGroup'
 import { useDisclosure } from '@mantine/hooks'
 import Drawer from '@/components/Drawer'
 
@@ -25,7 +25,7 @@ function Page() {
       <Logo />
       <Tab values={TABS} />
       <div className={'schedule-wrapper'}>
-        <FilterGroup type={'schedule'} {...{ open }} />
+        <ScheduleFilterGroup {...{ open }} />
         {opened && <Drawer type={'schedule'} {...{ opened, close }} />}
       </div>
     </main>
