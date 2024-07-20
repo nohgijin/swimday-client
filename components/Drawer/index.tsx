@@ -1,11 +1,11 @@
 import './style.scss'
 import { Button, CloseIcon, Drawer as MantineDrawer } from '@mantine/core'
-import ChipGroup from '@/components/ChipGroup'
+import { ResultChipGroup, ScheduleChipGroup } from '@/components/ChipGroup'
 import { useChipStore } from '@/store/useChipStore'
 import { useQueryParams } from '@/utils/useQueryParams'
 
 type Props = {
-  type: 'schedule' | 'record'
+  type: 'schedule' | 'result'
   opened: boolean;
   close: () => void;
 };
@@ -36,7 +36,7 @@ function Drawer({ type, opened, close }: Props) {
         icon: <CloseIcon width={16} height={16} />,
       }}
     >
-      <ChipGroup {...{ type }} />
+      {type === 'result' ? <ResultChipGroup /> : <ScheduleChipGroup />}
       <div className={'button-wrapper'}>
         <Button onClick={handleClose}>적용하기</Button>
       </div>

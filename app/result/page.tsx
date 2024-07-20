@@ -105,7 +105,7 @@ function Page() {
         <SearchInput />
       </div>
       <ResultFilterGroup {...{ open }} />
-      {opened && <Drawer type={'record'} {...{ opened, close }} />}
+      {opened && <Drawer type={'result'} {...{ opened, close }} />}
       <div className='results'>
         {MOCK_DATA.map((data) => {
           if (isTeam) {

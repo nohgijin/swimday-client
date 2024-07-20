@@ -27,7 +27,7 @@ export const initialState = {
   sort: 'new',
   gender: ['male', 'female'],
   event: ['free', 'back', 'breast', 'butterfly', 'im', 'relay', 'imRelay', 'mixedGenderRelay', 'mixedGenderImRelay'],
-  scheduleSort: '',
+  scheduleSort: 'deadline',
   location: [],
   meter: [],
   date: '',

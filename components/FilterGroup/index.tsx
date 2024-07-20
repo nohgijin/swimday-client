@@ -32,7 +32,6 @@ function ResultFilterGroup({ open }: Props) {
     return null
   }
 
-
   const isSortActive = sortParams !== INITIAL_SORT
   const isGenderActive = genderParamsNumber !== INITIAL_GENDER_COUNT
   const isEventActive = eventParamsNumber !== INITIAL_EVENT_COUNT

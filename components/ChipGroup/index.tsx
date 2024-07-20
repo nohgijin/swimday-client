@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { useQueryParams } from '@/utils/useQueryParams'
 import { useChipStore } from '@/store/useChipStore'
 
-export const FILTERS = [
+const RESULT_FILTERS = [
   [
     {
       value: 'new',
@@ -59,51 +59,124 @@ export const FILTERS = [
   ],
 ]
 
-type Props = {
-  type: 'schedule' | 'record'
-}
+const SCHEDULE_FILTERS = [
+  [
+    {
+      value: 'deadline',
+      label: '마감임박순',
+    },
 
-function ChipGroup({ type }: Props) {
+    {
+      value: 'new',
+      label: '신규등록순',
+    },
+  ],
+  [
+    {
+      value: 'seoul',
+      label: '서울',
+    },
+    {
+      value: 'gyeonggi',
+      label: '경기',
+    },
+    {
+      value: 'incheon',
+      label: '인천',
+    },
+    {
+      value: 'chungbuk',
+      label: '충북',
+    },
+    {
+      value: 'chungnam',
+      label: '충남',
+    },
+    {
+      value: 'daejeon',
+      label: '대전',
+    },
+    {
+      value: 'sejong',
+      label: '세종',
+    },
+    {
+      value: 'gangwon',
+      label: '강원',
+    },
+    {
+      value: 'daegu',
+      label: '대구',
+    },
+    {
+      value: 'gyeongbuk',
+      label: '경북',
+    },
+    {
+      value: 'gyeongnam',
+      label: '경남',
+    },
+    {
+      value: 'busan',
+      label: '부산',
+    },
+    {
+      value: 'ulsan',
+      label: '울산',
+    },
+    {
+      value: 'jeonbuk',
+      label: '전북',
+    },
+    {
+      value: 'jeonnam',
+      label: '전남',
+    },
+    {
+      value: 'gwangju',
+      label: '광주',
+    },
+    {
+      value: 'jeju',
+      label: '제주',
+    },
+  ],
+  [
+    {
+      value: 'half',
+      label: 25,
+    },
+    {
+      value: 'full',
+      label: 50,
+    },
+  ],
+  [
+    {
+      value: 'all',
+      label: '전체',
+    },
+    {
+      value: 'choice',
+      label: '날짜선택',
+    },
+  ],
+]
+
+function ResultChipGroup() {
   const { queryParams } = useQueryParams()
   const store = useChipStore()
   const { sort, gender, event, setSort, setGender, setEvent } = store
-  const {
-    scheduleSort,
-    location,
-    meter,
-    date,
-    depth,
-    setScheduleSort,
-    setLocation,
-    setMeter,
-    setDate,
-    setDepth,
-  } = store
   const isTeam = queryParams.get('isTeam')
 
   useEffect(() => {
-    if (type === 'record') {
-      const sortParam = queryParams.get('sort')
-      const genderParam = queryParams.get('gender') ? (queryParams.get('gender') as string)?.split(',') : []
-      const eventParam = queryParams.get('event') ? (queryParams.get('event') as string)?.split(',') : []
+    const sortParam = queryParams.get('sort')
+    const genderParam = queryParams.get('gender') ? (queryParams.get('gender') as string)?.split(',') : []
+    const eventParam = queryParams.get('event') ? (queryParams.get('event') as string)?.split(',') : []
 
-      sortParam && setSort(sortParam)
-      genderParam && setGender(genderParam)
-      eventParam && setEvent(eventParam)
-    }
-    if (type === 'schedule') {
-      const scheduleSortParam = queryParams.get('scheduleSort')
-      const locationParams = (queryParams.get('location') || '').split(',')
-      const meterParams = (queryParams.get('meter') || '').split(',')
-      const dateParams = queryParams.get('date')
-      const depthParams = (queryParams.get('depth') || '').split(',')
-
-      scheduleSortParam && setScheduleSort(scheduleSortParam)
-      locationParams && setLocation(locationParams)
-      meterParams && setMeter(meterParams)
-      dateParams && setDate(dateParams)
-      depthParams && setDepth(depthParams)
-    }
+    sortParam && setSort(sortParam)
+    genderParam && setGender(genderParam)
+    eventParam && setEvent(eventParam)
   }, [])
 
   return (
@@ -111,7 +184,7 @@ function ChipGroup({ type }: Props) {
       <div className={'title'}>정렬</div>
       <div className='group'>
         <Chip.Group onChange={(value) => setSort(value)}>
-          {FILTERS[0].map(({ label, value }) => (
+          {RESULT_FILTERS[0].map(({ label, value }) => (
             <Chip key={value} value={value} checked={sort === value}>
               {label}
             </Chip>
@@ -125,15 +198,13 @@ function ChipGroup({ type }: Props) {
             if (!value.length) return
             setGender(value)
           }}>
-            {FILTERS[1].map(({ label, value }) => (
+            {RESULT_FILTERS[1].map(({ label, value }) => (
               <Chip key={value} value={value} checked={gender?.includes(value)}>
                 {label}
               </Chip>
             ))}
           </Chip.Group>
         </div>
-      </>}
-      {!isTeam && <>
         <div className={'title'}>종목</div>
         <div className='group' style={{ flexDirection: 'column' }}>
           <Chip.Group multiple value={event} onChange={(value) => {
@@ -141,14 +212,14 @@ function ChipGroup({ type }: Props) {
             setEvent(value)
           }}>
             <div className='personal-event'>
-              {FILTERS[2].map(({ label, value }) => (
+              {RESULT_FILTERS[2].map(({ label, value }) => (
                 <Chip key={value} value={value} checked={event?.includes(value)}>
                   {label}
                 </Chip>
               ))}
             </div>
             <div className='team-event'>
-              {FILTERS[3].map(({ label, value }) => (
+              {RESULT_FILTERS[3].map(({ label, value }) => (
                 <Chip key={value} value={value} checked={event?.includes(value)}>
                   {label}
                 </Chip>
@@ -157,9 +228,16 @@ function ChipGroup({ type }: Props) {
           </Chip.Group>
         </div>
       </>}
-
     </div>
   )
 }
 
-export default ChipGroup
+//TODO: 스케쥴 칩 그룹 변수명 스키마랑 맞추기
+
+function ScheduleChipGroup() {
+  return (
+    <div>스케쥴칩그룹</div>
+  )
+}
+
+export { ResultChipGroup, ScheduleChipGroup }
