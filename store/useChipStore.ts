@@ -2,44 +2,62 @@ import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
 
 type States = {
-  sort: string;
+  resultSort: string;
   gender: string[];
   event: string[];
   scheduleSort: string;
   location: string[];
   meter: string[],
-  date: string;
-  depth: string[]
+  startDate: string;
+  depth: string;
 };
 
 type Actions = {
-  setSort: (sort: States['sort']) => void;
+  setResultSort: (resultSort: States['resultSort']) => void;
   setGender: (gender: States['gender']) => void;
   setEvent: (event: States['event']) => void;
   setScheduleSort: (scheduleSort: States['scheduleSort']) => void;
   setLocation: (location: States['location']) => void;
   setMeter: (meter: States['meter']) => void;
-  setDate: (date: States['date']) => void;
+  setDate: (startDate: States['date']) => void;
   setDepth: (depth: States['depth']) => void;
 };
 
-export const initialState = {
-  sort: 'new',
+export const initialState: States = {
+  resultSort: 'new',
   gender: ['male', 'female'],
   event: ['free', 'back', 'breast', 'butterfly', 'im', 'relay', 'imRelay', 'mixedGenderRelay', 'mixedGenderImRelay'],
   scheduleSort: 'deadline',
-  location: [],
-  meter: [],
-  date: '',
-  depth: [],
+  location: [
+    'seoul',
+    'gyeonggi',
+    'incheon',
+    'chungbuk',
+    'chungnam',
+    'daejeon',
+    'sejong',
+    'gangwon',
+    'daegu',
+    'gyeongbuk',
+    'gyeongnam',
+    'busan',
+    'ulsan',
+    'jeonbuk',
+    'jeonnam',
+    'gwangju',
+    'jeju',
+  ],
+  meter: ['half', 'full'],
+  startDate: '2010-01-01',
+  depth: '1.3',
 }
 
 export const useChipStore = create(
   immer<States & Actions>((set, get) => ({
     ...initialState,
-    setSort: (sort) => {
+    setResultSort: (resultSort) => {
       set((state) => {
-        state.sort = sort
+        state.resultSort = resultSort
       })
     },
     setGender: (gender) => {
@@ -67,9 +85,9 @@ export const useChipStore = create(
         state.meter = meter
       })
     },
-    setDate: (date) => {
+    setDate: (startDate) => {
       set((state) => {
-        state.date = date
+        state.startDate = startDate
       })
     },
     setDepth: (depth) => {

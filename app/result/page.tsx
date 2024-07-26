@@ -67,7 +67,7 @@ function Page() {
   const {
     queryParams,
     setQueryParams,
-  } = useQueryParams<{ isTeam: boolean; sort: string; gender: string | null; event: string | null }>()
+  } = useQueryParams<{ isTeam: boolean; resultSort: string; gender: string | null; event: string | null }>()
 
   const [opened, { open, close }] = useDisclosure(false)
   const router = useRouter()
@@ -76,14 +76,14 @@ function Page() {
   const MOCK_DATA = isTeam ? TEAM_MOCK_DATA : PERSON_MOCK_DATA
 
   useEffect(() => {
-    const { sort, gender, event } = initialState
+    const { resultSort, gender, event } = initialState
 
     if (isTeam) {
-      setQueryParams({ sort, gender: null, event: null })
+      setQueryParams({ resultSort, gender: null, event: null })
       return
     }
     setQueryParams({
-      sort,
+      resultSort,
       gender: gender.toString(),
       event: event.toString(),
     })

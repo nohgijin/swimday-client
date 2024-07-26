@@ -166,15 +166,15 @@ const SCHEDULE_FILTERS = [
 function ResultChipGroup() {
   const { queryParams } = useQueryParams()
   const store = useChipStore()
-  const { sort, gender, event, setSort, setGender, setEvent } = store
+  const { resultSort, gender, event, setResultSort, setGender, setEvent } = store
   const isTeam = queryParams.get('isTeam')
 
   useEffect(() => {
-    const sortParam = queryParams.get('sort')
+    const resultSortParam = queryParams.get('resultSort')
     const genderParam = queryParams.get('gender') ? (queryParams.get('gender') as string)?.split(',') : []
     const eventParam = queryParams.get('event') ? (queryParams.get('event') as string)?.split(',') : []
 
-    sortParam && setSort(sortParam)
+    resultSortParam && setResultSort(resultSortParam)
     genderParam && setGender(genderParam)
     eventParam && setEvent(eventParam)
   }, [])
@@ -183,9 +183,9 @@ function ResultChipGroup() {
     <div className={'chip-group'}>
       <div className={'title'}>정렬</div>
       <div className='group'>
-        <Chip.Group onChange={(value) => setSort(value)}>
+        <Chip.Group onChange={(value) => setResultSort(value)}>
           {RESULT_FILTERS[0].map(({ label, value }) => (
-            <Chip key={value} value={value} checked={sort === value}>
+            <Chip key={value} value={value} checked={resultSort === value}>
               {label}
             </Chip>
           ))}
