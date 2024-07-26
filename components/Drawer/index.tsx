@@ -12,10 +12,12 @@ type Props = {
 
 function Drawer({ type, opened, close }: Props) {
   const store = useChipStore()
-  const { resultSort, gender, event } = store
+  const { resultSort, gender, event, scheduleSort, location, meter, startDate, depth } = store
   const {
     setQueryParams,
-  } = useQueryParams<{ resultSort: string; gender: string | null; event: string | null }>()
+  } = useQueryParams<{
+    resultSort: string; gender: string | null; event: string | null; scheduleSort: string; location: string; meter: string; startDate: string; detph: string
+  }>()
 
   const handleClose = () => {
     close()
