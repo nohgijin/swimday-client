@@ -1,3 +1,4 @@
+
 .mantine-Drawer-header {
   padding: 24px;
 
@@ -13,8 +14,11 @@
   }
 }
 
+// TODO: 플록스한테 max-height 조정
 .mantine-Drawer-body {
   padding: 0 24px;
+  max-height: 80vh;
+  overflow: auto;
 }
 
 .mantine-Drawer-content {

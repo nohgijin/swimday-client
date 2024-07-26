@@ -1,11 +1,13 @@
 'use client'
 import Tab from '@/components/Tab'
 import Logo from '@/components/Logo'
-import { useCompetitions } from '@/service/competition/useCompetitionService'
 import './style.scss'
 import { ScheduleFilterGroup } from '@/components/FilterGroup'
 import { useDisclosure } from '@mantine/hooks'
-import Drawer from '@/components/Drawer'
+import { ScheduleDrawer } from '@/components/Drawer'
+import { useQueryParams } from '@/utils/useQueryParams'
+import { useEffect } from 'react'
+import { initialState } from '@/store/useChipStore'
 
 
 //TODO: 대회일정 페이지 해야함
@@ -14,11 +16,26 @@ const TABS = [
   { url: 'schedule', label: '대회 일정' },
 ]
 
+// const a = useCompetitions()
+
 function Page() {
-  const a = useCompetitions()
+  const {
+    setQueryParams,
+  } = useQueryParams<{ scheduleSort: string; location: string; meter: string; date: string; depth: string }>()
+
   const [opened, { open, close }] = useDisclosure(false)
 
-  console.log(a, 'ㅁㅁㅁㅁㄴ')
+  useEffect(() => {
+    const { scheduleSort, location, meter, date, depth } = initialState
+
+    setQueryParams({
+      scheduleSort,
+      location: location.toString(),
+      meter: meter.toString(),
+      date,
+      depth,
+    })
+  }, [])
 
   return (
     <main className={'schedule-page'}>
@@ -26,7 +43,7 @@ function Page() {
       <Tab values={TABS} />
       <div className={'schedule-wrapper'}>
         <ScheduleFilterGroup {...{ open }} />
-        {opened && <Drawer type={'schedule'} {...{ opened, close }} />}
+        {opened && <ScheduleDrawer {...{ opened, close }} />}
       </div>
     </main>
   )

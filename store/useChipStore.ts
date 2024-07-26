@@ -8,7 +8,7 @@ type States = {
   scheduleSort: string;
   location: string[];
   meter: string[],
-  startDate: string;
+  date: string;
   depth: string;
 };
 
@@ -19,7 +19,7 @@ type Actions = {
   setScheduleSort: (scheduleSort: States['scheduleSort']) => void;
   setLocation: (location: States['location']) => void;
   setMeter: (meter: States['meter']) => void;
-  setDate: (startDate: States['date']) => void;
+  setDate: (date: States['date']) => void;
   setDepth: (depth: States['depth']) => void;
 };
 
@@ -48,7 +48,7 @@ export const initialState: States = {
     'jeju',
   ],
   meter: ['half', 'full'],
-  startDate: '2010-01-01',
+  date: '2010-01-01',
   depth: '1.3',
 }
 
@@ -85,9 +85,9 @@ export const useChipStore = create(
         state.meter = meter
       })
     },
-    setDate: (startDate) => {
+    setDate: (date) => {
       set((state) => {
-        state.startDate = startDate
+        state.date = date
       })
     },
     setDepth: (depth) => {

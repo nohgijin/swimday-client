@@ -6,7 +6,7 @@ import Back from '@/assets/back.svg'
 import { useEffect } from 'react'
 import { ResultFilterGroup } from '@/components/FilterGroup'
 import { useQueryParams } from '@/utils/useQueryParams'
-import Drawer from '@/components/Drawer'
+import { ResultDrawer } from '@/components/Drawer'
 import { useDisclosure } from '@mantine/hooks'
 import { PersonProps, PersonSearchResultItem, TeamProps, TeamSearchResultItem } from '@/components/SearchResultItem'
 import { useRouter } from 'next/navigation'
@@ -105,7 +105,7 @@ function Page() {
         <SearchInput />
       </div>
       <ResultFilterGroup {...{ open }} />
-      {opened && <Drawer type={'result'} {...{ opened, close }} />}
+      {opened && <ResultDrawer {...{ opened, close }} />}
       <div className='results'>
         {MOCK_DATA.map((data) => {
           if (isTeam) {

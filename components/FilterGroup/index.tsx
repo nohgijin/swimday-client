@@ -9,17 +9,17 @@ type Props = {
   open: () => void;
 };
 
-const INITIAL_RESULT_SORT = initialState.resultSort
-const INITIAL_GENDER_COUNT = initialState.gender.length
-const INITIAL_EVENT_COUNT = initialState.event.length
-
-const RESULT_SORT = {
-  new: '최신순',
-  old: '오래된순',
-  fast: '최고기록순',
-}
-
 function ResultFilterGroup({ open }: Props) {
+  const INITIAL_RESULT_SORT = initialState.resultSort
+  const INITIAL_GENDER_COUNT = initialState.gender.length
+  const INITIAL_EVENT_COUNT = initialState.event.length
+
+  const RESULT_SORT = {
+    new: '최신순',
+    old: '오래된순',
+    fast: '최고기록순',
+  }
+
   const { queryParams } = useQueryParams<{ isTeam: boolean; resultSort: string; gender: string; event: string }>()
 
   const teamParams = queryParams.get('isTeam')
@@ -68,8 +68,64 @@ function ResultFilterGroup({ open }: Props) {
   )
 }
 
-function ScheduleFilterGroup() {
-  return <div>스케쥴필터그룹</div>
+
+function ScheduleFilterGroup({ open }: Props) {
+  const INITIAL_SCHEDULE_SORT = initialState.scheduleSort
+  const INITIAL_LOCATION_COUNT = initialState.location.length
+  const INITIAL_METER_COUNT = initialState.meter.length
+  const INITIAL_DATE_SORT = initialState.date
+  const INITIAL_DEPTH_SORT = initialState.depth
+
+  const SCHEDULE_SORT = {
+    deadline: '마감임박순',
+    new: '신규기록순',
+  }
+
+  const { queryParams } = useQueryParams<{ scheduleSort: string; location: string; meter: string; date: string; depth: string }>()
+
+  const scheduleSortParams = queryParams.get('scheduleSort') as keyof typeof SCHEDULE_SORT
+  const locationParamsNumber = (queryParams.get('location') || '')?.split(',')?.length
+  const meterParamsNumber = (queryParams.get('meter') || '')?.split(',')?.length
+  const dateParams = queryParams.get('date')
+  const depthParams = queryParams.get('depth')
+
+  const noRenderCondition = !scheduleSortParams
+
+  if (noRenderCondition) {
+    return null
+  }
+
+  const isScheduleSortActive = scheduleSortParams !== INITIAL_SCHEDULE_SORT
+  const isLocationActive = locationParamsNumber !== INITIAL_LOCATION_COUNT
+  const isMeterActive = meterParamsNumber !== INITIAL_METER_COUNT
+  const isDateActive = dateParams !== INITIAL_DATE_SORT
+  const isDepthActive = depthParams !== INITIAL_DEPTH_SORT
+
+  const isAllActive = isScheduleSortActive || isLocationActive || isMeterActive || isDateActive || isDepthActive
+
+  return (
+    <>
+      <div className={'filter-group'}>
+        <div className={classNames('filter', isAllActive && 'active')} onClick={open}>
+          <Filter width={16} height={16} className={'filter-icon'} />
+          전체 필터
+          <Dropdown width={16} height={16} className={'dropdown-icon'} />
+        </div>
+        <div className={classNames('filter', isScheduleSortActive && 'active')} onClick={open}>
+          정렬&nbsp;({SCHEDULE_SORT[scheduleSortParams]})
+          <Dropdown width={16} height={16} className={'dropdown-icon'} />
+        </div>
+        <div className={classNames('filter', isLocationActive && 'active')} onClick={open}>
+          지역&nbsp;{locationParamsNumber}
+          <Dropdown width={16} height={16} className={'dropdown-icon'} />
+        </div>
+        <div className={classNames('filter', isMeterActive && 'active')} onClick={open}>
+          거리&nbsp;{meterParamsNumber}
+          <Dropdown width={16} height={16} className={'dropdown-icon'} />
+        </div>
+      </div>
+    </>
+  )
 }
 
 export { ResultFilterGroup, ScheduleFilterGroup }

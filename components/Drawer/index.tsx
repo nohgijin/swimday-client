@@ -5,18 +5,17 @@ import { useChipStore } from '@/store/useChipStore'
 import { useQueryParams } from '@/utils/useQueryParams'
 
 type Props = {
-  type: 'schedule' | 'result'
   opened: boolean;
   close: () => void;
 };
 
-function Drawer({ type, opened, close }: Props) {
+function ResultDrawer({ opened, close }: Props) {
   const store = useChipStore()
-  const { resultSort, gender, event, scheduleSort, location, meter, startDate, depth } = store
+  const { resultSort, gender, event } = store
   const {
     setQueryParams,
   } = useQueryParams<{
-    resultSort: string; gender: string | null; event: string | null; scheduleSort: string; location: string; meter: string; startDate: string; detph: string
+    resultSort: string; gender: string | null; event: string | null;
   }>()
 
   const handleClose = () => {
@@ -38,7 +37,7 @@ function Drawer({ type, opened, close }: Props) {
         icon: <CloseIcon width={16} height={16} />,
       }}
     >
-      {type === 'result' ? <ResultChipGroup /> : <ScheduleChipGroup />}
+      <ResultChipGroup />
       <div className={'button-wrapper'}>
         <Button onClick={handleClose}>적용하기</Button>
       </div>
@@ -46,4 +45,43 @@ function Drawer({ type, opened, close }: Props) {
   )
 }
 
-export default Drawer
+
+function ScheduleDrawer({ opened, close }: Props) {
+  const store = useChipStore()
+  const { scheduleSort, location, meter, date, depth } = store
+  const {
+    setQueryParams,
+  } = useQueryParams<{
+    scheduleSort: string; location: string; meter: string; date: string; depth: string
+  }>()
+
+  const handleClose = () => {
+    close()
+    setQueryParams({
+      scheduleSort,
+      location: location.toString(),
+      meter: meter.toString(),
+      date,
+      depth,
+    })
+  }
+
+  return (
+    <MantineDrawer
+      opened={opened}
+      onClose={handleClose}
+      title='필터'
+      position={'bottom'}
+      closeButtonProps={{
+        icon: <CloseIcon width={16} height={16} />,
+      }}
+    >
+      <ScheduleChipGroup />
+      <div className={'button-wrapper'}>
+        <Button onClick={handleClose}>적용하기</Button>
+      </div>
+    </MantineDrawer>
+  )
+}
+
+export { ScheduleDrawer, ResultDrawer }
