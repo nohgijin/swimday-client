@@ -1,0 +1,18 @@
+@mixin text-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+}
+
+@mixin text-ellipsis-line($line: 2) {
+  @supports (-webkit-line-clamp: $line) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: initial;
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-line-clamp: $line;
+    -webkit-box-orient: vertical;
+  }
+}

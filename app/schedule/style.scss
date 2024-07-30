@@ -1,9 +1,25 @@
 .schedule-page {
-  height: 100vh;
+  height: 100%;
+  background: $background-40;
+  overflow-y: hidden;
+
+  .sticky-header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    background: $background-40;
+  }
 
   .schedule-wrapper {
-    height: 100%;
     padding: 0 24px;
-    background: $background-40;
+  }
+
+  .competitions {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    height: calc(100% - 212px);
+    margin-top: 12px;
+    overflow-y: auto;
   }
 }

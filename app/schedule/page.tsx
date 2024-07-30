@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { initialState } from "@/store/useChipStore";
 import { useCompetitions } from "@/service/competition/useCompetitionService";
 import Checkbox from "@/components/Checkbox";
+import CompetitionCard from "@/components/CompetitionCard";
 
 //TODO: 대회일정 페이지 해야함
 const TABS = [
@@ -48,12 +49,21 @@ function Page() {
 
   return (
     <main className={"schedule-page"}>
-      <Logo />
-      <Tab values={TABS} />
-      <div className={"schedule-wrapper"}>
-        <ScheduleFilterGroup {...{ open }} />
-        {opened && <ScheduleDrawer {...{ opened, close }} />}
-        <Checkbox label={"모집중인 대회만"} onClick={handleCheckboxClick} />
+      <div className={"sticky-header"}>
+        <Logo />
+        <Tab values={TABS} />
+        <div className={"schedule-wrapper"}>
+          <ScheduleFilterGroup {...{ open }} />
+          {opened && <ScheduleDrawer {...{ opened, close }} />}
+          <Checkbox label={"모집중인 대회만"} onClick={handleCheckboxClick} />
+        </div>
+      </div>
+      <div className={"competitions"}>
+        <CompetitionCard />
+        <CompetitionCard />
+        <CompetitionCard />
+        <CompetitionCard />
+        <CompetitionCard />
       </div>
     </main>
   );
