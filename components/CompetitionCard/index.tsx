@@ -1,6 +1,13 @@
 import "./style.scss";
 
 function CompetitionCard() {
+  const STATUS = {
+    reservationStart: { title: "접수 시작", color: "#e0eeff" },
+    reservationFinished: { title: "접수 마감", color: "#c4deff" },
+    competitionStart: { title: "대회 시작", color: "#93c2ff" },
+    ongoing: { title: "진행중", color: "#1d7bf3" },
+    finished: { title: "종료", color: "#4276b8" },
+  };
   return (
     <div className={"competition-card"}>
       <div className={"d-day"}>
