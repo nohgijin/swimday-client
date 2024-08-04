@@ -2,7 +2,6 @@
   display: flex;
   gap: 16px;
   width: 100%;
-  height: 122px;
   padding: 20px;
   background: $background-50;
   border-radius: 12px;
@@ -15,6 +14,7 @@
     gap: 4px;
     width: 25%;
     min-width: 25%;
+    aspect-ratio: 1 / 1;
     color: $text-black-20;
     background: red;
     border-radius: 4px;
@@ -31,7 +31,7 @@
   .info {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    justify-content: space-between;
 
     .name {
       color: $text-black-20;
@@ -39,9 +39,13 @@
       @include text-ellipsis-line();
     }
 
-    .date {
-      color: $text-black-40;
-      @include typo-regular-body2();
+    .all-date {
+      display: flex;
+
+      .date {
+        color: $text-black-40;
+        @include typo-regular-body2();
+      }
     }
   }
 }
