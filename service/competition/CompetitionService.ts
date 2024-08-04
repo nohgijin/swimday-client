@@ -1,10 +1,10 @@
 import Service from '@/service/Service'
 import { Competition } from '@/model/competition'
-import { Strapi } from '@/service/Strapi'
+import { Strapi, Strapis } from '@/service/Strapi'
 
 class CompetitionService extends Service {
   getCompetitions() {
-    return this.http.get<Strapi<Competition[]>>(`/competitions`)
+    return this.http.get<Strapis<Competition>>(`/competitions`)
   }
 
   getCompetition(competitionId: string) {

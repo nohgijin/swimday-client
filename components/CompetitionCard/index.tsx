@@ -59,8 +59,6 @@ function CompetitionCard({ competition }: Competition) {
   }
   const today = dayjs()
 
-  console.log(competition, '대회정보들')
-
   const { name, start_date, end_date } = competition
 
   return (

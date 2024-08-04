@@ -11,8 +11,8 @@ import { initialState } from '@/store/useChipStore'
 import { useCompetitions } from '@/service/competition/useCompetitionService'
 import Checkbox from '@/components/Checkbox'
 import CompetitionCard from '@/components/CompetitionCard'
+import Link from 'next/link'
 
-//TODO: 대회일정 페이지 해야함
 const TABS = [
   { url: 'record', label: '기록 검색' },
   { url: 'schedule', label: '대회 일정' },
@@ -30,6 +30,7 @@ function Page() {
   const [opened, { open, close }] = useDisclosure(false)
   const { data } = useCompetitions()
 
+  console.log('결과들', data)
 
   useEffect(() => {
     const { scheduleSort, location, meter, date, depth } = initialState
@@ -61,9 +62,12 @@ function Page() {
       </div>
       <div className={'competitions'}>
         {data?.data.map((competition) =>
-          <CompetitionCard
+          <Link
             key={competition.id}
-            competition={competition.attributes} />,
+            href={`/schedule/${competition.id}`}>
+            <CompetitionCard
+              competition={competition.attributes} />
+          </Link>,
         )}
       </div>
     </main>

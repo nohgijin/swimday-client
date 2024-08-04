@@ -1,4 +1,4 @@
-export type Strapi<T> = {
+export type Strapis<T> = {
   data: { id: number; attributes: T }[]
   meta: {
     pagination: {
@@ -8,4 +8,8 @@ export type Strapi<T> = {
       total: number
     }
   }
+}
+
+export type Strapi<T> = {
+  data: { id: number; attributes: T }
 }
