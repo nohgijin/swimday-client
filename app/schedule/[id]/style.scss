@@ -1,0 +1,38 @@
+.competition-detail-page {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 24px 0 24px;
+  background: $background-50;
+
+  .competition-fixed {
+    position: sticky;
+    top: 0;
+    left: 0;
+    background: $background-50;
+  }
+
+  .mantine-ActionIcon-root {
+    width: auto;
+    margin: 12px auto 12px 0;
+  }
+
+  .competition-title-wrapper {
+    padding: 24px 0;
+
+    .title {
+      @include typo-semi-h1();
+      color: $text-black-20;
+    }
+
+    .update-date {
+      @include typo-regular-body2();
+      color: $text-black-40;
+    }
+  }
+
+  .competition-detail-wrapper {
+    height: calc(100% - 210px);
+    padding: 24px 0;
+    overflow-y: auto;
+  }
+}
