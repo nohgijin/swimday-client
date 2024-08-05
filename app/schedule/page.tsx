@@ -11,6 +11,54 @@ import { initialState } from "@/store/useChipStore";
 import { useCompetitions } from "@/service/competition/useCompetitionService";
 import Checkbox from "@/components/Checkbox";
 import CompetitionCard from "@/components/CompetitionCard";
+import dayjs from "dayjs";
+
+const MOCKS = [
+  {
+    name: "접수 시작 제11회 김해시수영연맹회장배 전국마스터즈 수영대회 (단수로)",
+    start_date: dayjs().add(3, "month").valueOf(),
+    end_date: dayjs().add(4, "month").valueOf(),
+    registration_start_date: dayjs().add(1, "month").valueOf(),
+    registration_end_date: dayjs().add(2, "month").valueOf(),
+  },
+  {
+    name: "접수 시작 제11회 김해시수영연맹회장배 전국마스터즈 수영대회 (단수로)",
+    start_date: dayjs().add(3, "month").valueOf(),
+    end_date: dayjs().add(4, "month").valueOf(),
+    registration_start_date: dayjs().add(1, "month").valueOf(),
+    registration_end_date: dayjs().add(2, "month").valueOf(),
+    isClosed: true,
+  },
+  {
+    name: "접수마감 제11회 김해시수영연맹회장배 전국마스터즈 수영대회 (단수로)",
+    start_date: dayjs().add(3, "month").valueOf(),
+    end_date: dayjs().add(4, "month").valueOf(),
+    registration_start_date: dayjs().subtract(1, "month").valueOf(),
+    registration_end_date: dayjs().add(1, "month").valueOf(),
+    isClosed: true,
+  },
+  {
+    name: "대회시작 제11회 김해시수영연맹회장배 전국마스터즈 수영대회 (단수로)",
+    start_date: dayjs().add(1, "month").valueOf(),
+    end_date: dayjs().add(2, "month").valueOf(),
+    registration_start_date: dayjs().subtract(2, "month").valueOf(),
+    registration_end_date: dayjs().subtract(1, "month").valueOf(),
+  },
+  {
+    name: "진행중 제11회 김해시수영연맹회장배 전국마스터즈 수영대회 (단수로)",
+    start_date: dayjs().valueOf(),
+    end_date: dayjs().add(7, "day").valueOf(),
+    registration_start_date: dayjs().subtract(2, "month").valueOf(),
+    registration_end_date: dayjs().subtract(1, "month").valueOf(),
+  },
+  {
+    name: "종료 제11회 김해시수영연맹회장배 전국마스터즈 수영대회 (단수로)",
+    start_date: dayjs().subtract(1, "day").valueOf(),
+    end_date: dayjs().subtract(2, "day").valueOf(),
+    registration_start_date: dayjs().subtract(2, "month").valueOf(),
+    registration_end_date: dayjs().subtract(1, "month").valueOf(),
+  },
+];
 
 //TODO: 대회일정 페이지 해야함
 const TABS = [
@@ -28,7 +76,7 @@ function Page() {
   }>();
   const [isAccepting, setIsAccepting] = useState(false);
   const [opened, { open, close }] = useDisclosure(false);
-  const a = useCompetitions();
+  // const a = useCompetitions();
 
   useEffect(() => {
     const { scheduleSort, location, meter, date, depth } = initialState;
@@ -59,11 +107,9 @@ function Page() {
         </div>
       </div>
       <div className={"competitions"}>
-        <CompetitionCard />
-        <CompetitionCard />
-        <CompetitionCard />
-        <CompetitionCard />
-        <CompetitionCard />
+        {MOCKS.map((mock) => (
+          <CompetitionCard key={mock.name} value={mock} />
+        ))}
       </div>
     </main>
   );

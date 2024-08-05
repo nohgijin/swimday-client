@@ -3,6 +3,10 @@ import localFont from "next/font/local";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
 import ReactQueryProviders from "@/hooks/useReactQuery";
+import "dayjs/locale/ko";
+import dayjs from "dayjs";
+
+dayjs.locale("ko");
 
 const font = localFont({
   src: "../fonts/Pretendard-Regular.woff2",
