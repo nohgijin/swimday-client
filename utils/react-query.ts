@@ -1,6 +1,6 @@
 import { HydrationBoundary, QueryClient, dehydrate, QueryState, QueryKey } from "@tanstack/react-query";
 import { cache } from "react";
-import { isEqual } from "@/utils";
+import { isEqual } from "@/utils/equal";
 
 export const getQueryClient = cache(() => new QueryClient());
 
