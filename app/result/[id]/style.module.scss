@@ -17,4 +17,58 @@
       margin-right: auto;
     }
   }
+
+  .detail {
+    padding: 0 12px;
+
+    .ranking {
+      margin-bottom: 24px;
+      @include typo-semi-h2();
+      color: $text-black-10;
+    }
+
+    .record {
+      margin-bottom: 24px;
+      @include typo-semi-record();
+      color: $text-black-10;
+    }
+
+    .participant {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 24px;
+      @include typo-regular-body1();
+      color: $text-black-30;
+    }
+
+    .name {
+      margin-bottom: 10px;
+      @include typo-regular-body1();
+      color: $text-black-30;
+    }
+
+    .date {
+      margin-bottom: 24px;
+      @include typo-regular-body2();
+      color: $text-black-50;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 60px;
+
+      .tag {
+        padding: 8px 12px;
+        border-radius: 4px;
+        background: $background-30;
+      }
+    }
+
+    .medal {
+      width: 100%;
+      height: auto;
+    }
+  }
 }
