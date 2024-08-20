@@ -1,6 +1,6 @@
 "use client";
 
-import "./style.scss";
+import $ from "./style.module.scss";
 import dayjs from "dayjs";
 import { Competition } from "@/model/competition";
 import isBetween from "dayjs/plugin/isBetween";
@@ -69,16 +69,16 @@ function CompetitionCard({ competition }: Props) {
   const { name, start_date, end_date } = competition;
 
   return (
-    <div className={"competition-card"}>
-      <div className={"d-day"}>
-        <div className={"status"}>접수 시작</div>
-        <div className={"remain"}>D-36</div>
+    <div className={$["competition-card"]}>
+      <div className={$["d-day"]}>
+        <div className={$.status}>접수 시작</div>
+        <div className={$.remain}>D-36</div>
       </div>
-      <div className={"info"}>
-        <div className={"name"}>{name}</div>
-        <div className={"all-date"}>
-          <div className={"date"}>{start_date}</div>
-          {start_date !== end_date && <div className={"date"}>&nbsp;~&nbsp;{end_date}</div>}
+      <div className={$.info}>
+        <div className={$.name}>{name}</div>
+        <div className={$["all-date"]}>
+          <div className={$.date}>{start_date}</div>
+          {start_date !== end_date && <div className={$.date}>&nbsp;~&nbsp;{end_date}</div>}
         </div>
       </div>
     </div>

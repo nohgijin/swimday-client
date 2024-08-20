@@ -1,7 +1,7 @@
 "use client";
 import Tab from "@/components/Tab";
 import Logo from "@/components/Logo";
-import "./style.scss";
+import $ from "./style.module.scss";
 import SearchInput from "@/components/SearchInput";
 
 const TABS = [
@@ -11,11 +11,11 @@ const TABS = [
 
 function Page() {
   return (
-    <main className={"search-page"}>
+    <main className={$["search-page"]}>
       <Logo />
-      <Tab values={TABS} />
-      <div className="search-wrapper">
-        <div className="description">
+      <Tab className={$.tab} values={TABS} />
+      <div className={$["search-wrapper"]}>
+        <div className={$["description"]}>
           기록을 확인하고 싶은
           <br />
           수영 선수/팀 이름을 적어주세요.

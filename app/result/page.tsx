@@ -1,6 +1,6 @@
 "use client";
 
-import "./style.scss";
+import $ from "./style.module.scss";
 import { ActionIcon } from "@mantine/core";
 import Back from "@/assets/back.svg";
 import { useEffect } from "react";
@@ -92,11 +92,11 @@ function Page() {
   }, []);
 
   return (
-    <main className={"result-page"}>
-      <div className={"input-wrapper"}>
+    <main className={$["result-page"]}>
+      <div className={$["input-wrapper"]}>
         <ActionIcon
           component={"button"}
-          className={"back"}
+          className={$["back"]}
           variant={"transparent"}
           onClick={() => {
             router.back();
@@ -108,7 +108,7 @@ function Page() {
       </div>
       <ResultFilterGroup {...{ open }} />
       {opened && <ResultDrawer {...{ opened, close }} />}
-      <div className="results">
+      <div className={$["results"]}>
         {MOCK_DATA.map((data) => {
           if (isTeam) {
             const itemData = data as TeamProps;

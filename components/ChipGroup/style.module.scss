@@ -23,22 +23,20 @@
   }
 }
 
-.mantine-Chip-root {
-  .mantine-Chip-label {
-    height: 44px;
-    padding: 8px 16px;
-    border-radius: 30px;
-    background: $status-selected-n;
-    @include typo-regular-body1();
+.mantine-Chip-label {
+  height: 44px;
+  padding: 8px 16px;
+  border-radius: 30px;
+  background: $status-selected-n;
+  @include typo-regular-body1();
 
-    &[data-checked="true"] {
-      background: $status-selected-y;
-      color: $text-blue-10;
+  &[data-checked="true"] {
+    background: $status-selected-y;
+    color: $text-blue-10;
 
-      svg {
-        path {
-          fill: $text-blue-10;
-        }
+    svg {
+      path {
+        fill: $text-blue-10;
       }
     }
   }

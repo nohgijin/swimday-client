@@ -1,0 +1,19 @@
+.search-page {
+  height: 100vh;
+  background: $background-50;
+
+  .tab {
+    margin-bottom: 16px;
+  }
+
+  .search-wrapper {
+    padding: 0 24px;
+
+    .description {
+      margin-bottom: 28px;
+      text-align: center;
+      @include typo-semi-h2();
+      color: $text-black-10;
+    }
+  }
+}
