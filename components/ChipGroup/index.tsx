@@ -78,7 +78,7 @@ function ResultChipGroup() {
     <div className={$["chip-group"]}>
       <div className={$.title}>정렬</div>
       <div className={$.group}>
-        <Chip.Group onChange={(value) => setResultSort(value)}>
+        <Chip.Group multiple={false} onChange={(value) => setResultSort(value)}>
           {RESULT_FILTERS[0].map(({ label, value }) => (
             <Chip key={value} value={value} checked={resultSort === value}>
               {label}
@@ -251,11 +251,11 @@ function ScheduleChipGroup() {
   const dateRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const scheduleSortParam = queryParams.get("scheduleSort");
+    const scheduleSortParam = queryParams.get("scheduleSort") ?? "";
     const locationParam = queryParams.get("location") ? (queryParams.get("location") as string)?.split(",") : [];
     const meterParam = queryParams.get("meter") ? (queryParams.get("meter") as string)?.split(",") : [];
-    const dateParam = queryParams.get("date");
-    const depthParam = queryParams.get("depth");
+    const dateParam = queryParams.get("date") ?? "";
+    const depthParam = queryParams.get("depth") ?? "";
 
     setScheduleSort && setScheduleSort(scheduleSortParam);
     setLocation && setLocation(locationParam);
@@ -275,7 +275,7 @@ function ScheduleChipGroup() {
     <div className={$["chip-group"]}>
       <div className={$.title}>정렬</div>
       <div className={$.group}>
-        <Chip.Group onChange={(value) => setScheduleSort(value)}>
+        <Chip.Group multiple={false} onChange={(value) => setScheduleSort(value)}>
           {SCHEDULE_FILTERS[0].map(({ label, value }) => (
             <Chip
               classNames={{ label: $["mantine-Chip-label"] }}
@@ -332,10 +332,10 @@ function ScheduleChipGroup() {
           ))}
         </Chip.Group>
       </div>
-      <div className={$.title}>날씨</div>
+      <div className={$.title}>날짜</div>
       <div className={$.group}>
         <Chip.Group
-          multiple
+          multiple={false}
           value={date}
           onChange={(value) => {
             if (!value.length) return;
