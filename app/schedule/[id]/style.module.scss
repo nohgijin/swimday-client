@@ -9,6 +9,7 @@
     top: 0;
     left: 0;
     background: $background-50;
+    z-index: 99999;
   }
 
   .back {
@@ -34,5 +35,30 @@
     height: calc(100% - 210px);
     padding: 24px 0;
     overflow-y: auto;
+
+    .file {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      background: $background-40;
+      border-radius: 8px;
+
+      .file-title,
+      .file-content {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        @include typo-semi-body1();
+        color: $text-black-30;
+      }
+    }
+
+    .pdf {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
   }
 }

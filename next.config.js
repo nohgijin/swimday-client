@@ -28,6 +28,7 @@ const nextConfig = {
       test: /\.svg$/i,
       use: ["@svgr/webpack"],
     });
+    config.resolve.alias.canvas = false;
 
     return config;
   },
