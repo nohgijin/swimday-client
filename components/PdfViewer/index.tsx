@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import $ from "./style.module.scss";
 
@@ -21,11 +21,12 @@ function PdfViewer({ path }: Props) {
   };
 
   return (
-    <div>
+    <div className={$.doc}>
       <Document file={path} onLoadSuccess={onDocumentLoadSuccess}>
         {Array.from(new Array(numPages), (_, index) => {
           return (
             <Page
+              className={$.page}
               key={`page_${index + 1}`}
               pageNumber={index + 1}
               width={700}

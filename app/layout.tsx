@@ -5,6 +5,7 @@ import "@mantine/core/styles.css";
 import ReactQueryProviders from "@/hooks/useReactQuery";
 import "dayjs/locale/ko";
 import dayjs from "dayjs";
+import React from "react";
 
 dayjs.locale("ko");
 

@@ -62,3 +62,42 @@
     }
   }
 }
+
+.button-wrapper {
+  position: fixed;
+  bottom: 0;
+  width: calc(100% - 48px);
+  padding: 16px 0;
+  background: $background-50;
+  border: none;
+  z-index: 99;
+
+  .button {
+    width: 100%;
+    height: 60px;
+    padding: 12px 28px;
+    background: $status-activated-primary;
+    border-radius: 12px;
+    @include typo-regular-body1();
+    color: $text-black-60;
+  }
+}
+
+.toast {
+  position: fixed;
+  bottom: 92px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0 auto;
+  background: $background-10;
+  border-radius: 4px;
+  padding: 12px;
+  color: $text-black-60;
+  opacity: 1;
+  transition: opacity 0.5s ease-out; /* 애니메이션 설정 */
+  @include typo-regular-body2;
+}
+
+.toast.hide {
+  opacity: 0; /* 숨길 때 투명하게 */
+}
