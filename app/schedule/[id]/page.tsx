@@ -20,7 +20,7 @@ function Page({ params: { id } }: { params: { id: string } }) {
     if (showToast) {
       const timer = setTimeout(() => {
         setShowToast(false);
-      }, 3000);
+      }, 30000);
 
       return () => clearTimeout(timer);
     }
@@ -77,9 +77,7 @@ function Page({ params: { id } }: { params: { id: string } }) {
             대회요강
           </Link>
         </div>
-        <div className={$.pdf}>
-          <PdfViewer path={documentation} />
-        </div>
+        <div className={$.pdf}>{/*<PdfViewer path={documentation} />*/}</div>
         {showToast && <div className={$.toast}>링크가 복사되었습니다.</div>}
         <div className={$["button-wrapper"]}>
           <Button className={$.button} onClick={handleCopy}>
