@@ -22,7 +22,7 @@ function PdfViewer({ path }: Props) {
 
   return (
     <div className={$.doc}>
-      <Document file={path} onLoadSuccess={onDocumentLoadSuccess}>
+      <Document file={path} onLoadSuccess={onDocumentLoadSuccess} loading={null}>
         {Array.from(new Array(numPages), (_, index) => {
           return (
             <Page
@@ -32,6 +32,7 @@ function PdfViewer({ path }: Props) {
               width={700}
               renderAnnotationLayer={true}
               renderTextLayer={true}
+              loading={null}
             />
           );
         })}
