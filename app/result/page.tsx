@@ -93,20 +93,22 @@ function Page() {
 
   return (
     <main className={$["result-page"]}>
-      <div className={$["input-wrapper"]}>
-        <ActionIcon
-          component={"button"}
-          className={$["back"]}
-          variant={"transparent"}
-          onClick={() => {
-            router.back();
-          }}
-        >
-          <Back width={24} height={24} />
-        </ActionIcon>
-        <SearchInput />
+      <div className={$["sticky-header"]}>
+        <div className={$["input-wrapper"]}>
+          <ActionIcon
+            component={"button"}
+            className={$["back"]}
+            variant={"transparent"}
+            onClick={() => {
+              router.back();
+            }}
+          >
+            <Back width={24} height={24} />
+          </ActionIcon>
+          <SearchInput />
+        </div>
+        <ResultFilterGroup {...{ open }} />
       </div>
-      <ResultFilterGroup {...{ open }} />
       {opened && <ResultDrawer {...{ opened, close }} />}
       <div className={$["results"]}>
         {MOCK_DATA.map((data) => {

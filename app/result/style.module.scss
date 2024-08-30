@@ -1,13 +1,22 @@
 .result-page {
   height: 100vh;
-  padding: 12px 24px 24px;
   overflow-x: hidden;
   overflow-y: auto;
   background: $background-40;
+  padding: 0 24px;
+
+  .sticky-header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    background: $background-40;
+    padding-bottom: 12px;
+  }
 
   .input-wrapper {
     display: flex;
     gap: 8px;
+    padding: 12px 0;
 
     .back {
       width: 48px;
