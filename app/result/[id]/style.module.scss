@@ -1,13 +1,16 @@
 .result-detail-page {
   display: flex;
   flex-direction: column;
-  height: 100vh;
   padding: 0 24px;
   background: $background-50;
 
   .back {
+    position: sticky;
+    top: 0;
+    left: 0;
     padding: 12px 0;
     margin-bottom: 32px;
+    background: $background-50;
 
     .back-icon {
       position: sticky;
