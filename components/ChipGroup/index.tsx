@@ -80,7 +80,12 @@ function ResultChipGroup() {
       <div className={$.group}>
         <Chip.Group multiple={false} onChange={(value) => setResultSort(value)}>
           {RESULT_FILTERS[0].map(({ label, value }) => (
-            <Chip key={value} value={value} checked={resultSort === value}>
+            <Chip
+              classNames={{ label: $["mantine-Chip-label"] }}
+              key={value}
+              value={value}
+              checked={resultSort === value}
+            >
               {label}
             </Chip>
           ))}
@@ -99,7 +104,12 @@ function ResultChipGroup() {
               }}
             >
               {RESULT_FILTERS[1].map(({ label, value }) => (
-                <Chip key={value} value={value} checked={gender?.includes(value)}>
+                <Chip
+                  classNames={{ label: $["mantine-Chip-label"] }}
+                  key={value}
+                  value={value}
+                  checked={gender?.includes(value)}
+                >
                   {label}
                 </Chip>
               ))}
@@ -117,14 +127,24 @@ function ResultChipGroup() {
             >
               <div className={$["personal-event"]}>
                 {RESULT_FILTERS[2].map(({ label, value }) => (
-                  <Chip key={value} value={value} checked={event?.includes(value)}>
+                  <Chip
+                    classNames={{ label: $["mantine-Chip-label"] }}
+                    key={value}
+                    value={value}
+                    checked={event?.includes(value)}
+                  >
                     {label}
                   </Chip>
                 ))}
               </div>
               <div className={$["team-event"]}>
                 {RESULT_FILTERS[3].map(({ label, value }) => (
-                  <Chip key={value} value={value} checked={event?.includes(value)}>
+                  <Chip
+                    classNames={{ label: $["mantine-Chip-label"] }}
+                    key={value}
+                    value={value}
+                    checked={event?.includes(value)}
+                  >
                     {label}
                   </Chip>
                 ))}
