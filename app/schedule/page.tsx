@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import { initialState } from "@/store/useChipStore";
 import { useCompetitions } from "@/service/competition/useCompetitionService";
 import Checkbox from "@/components/Checkbox";
-import CompetitionCard from "@/components/CompetitionCard";
+import CompetitionCard, { MOCKS } from "@/components/CompetitionCard";
 import Link from "next/link";
 
 const TABS = [
@@ -59,10 +59,13 @@ function Page() {
         </div>
       </div>
       <div className={$["competitions"]}>
-        {data?.data.map((competition) => (
-          <Link key={competition.id} href={`/schedule/${competition.id}`}>
-            <CompetitionCard competition={competition.attributes} />
-          </Link>
+        {/*{data?.data.map((competition) => (*/}
+        {/*  <Link key={competition.id} href={`/schedule/${competition.id}`}>*/}
+        {/*    <CompetitionCard competition={competition.attributes} />*/}
+        {/*  </Link>*/}
+        {/*))}*/}
+        {MOCKS.map((mock) => (
+          <CompetitionCard competition={mock} key={mock.name} />
         ))}
       </div>
     </main>

@@ -6,73 +6,153 @@ import { Competition } from "@/model/competition";
 import isBetween from "dayjs/plugin/isBetween";
 dayjs.extend(isBetween);
 
-const MOCKS = [
+//접수 시작 전
+//접수 시작 되고 접수 날짜 마감 전 || 접수 마감 전
+//접수 선착순 마감되고 대회 시작 전 || 접수 날짜 마감되고 대회 시작 전
+//대회 시작 함
+//대회 끝남
+
+export const MOCKS = [
+  //접수 시작 전
   {
-    //접수 시작
-    start_date: "20224-09-01",
-    end_date: "2024-09-02",
-    registration_start_date: "2024-07-01",
-    registration_end_date: "2024-08-12",
+    name: "광교복합체육센터1 광교복합체육센터2 광교복합체육센터3 광교복합체육센터4 광교복합체육센터5 광교복합체육센터6",
+    start_date: "2024-11-1",
+    end_date: "2024-11-2",
+    registration_start_date: "2024-10-1",
+    registration_end_date: "2024-10-12",
+    location: "광교복합체육센터",
+    meter: 50,
+    documentation: "",
+    depth: 2,
+  },
+  // 접수 시작되고 접수 날짜 마감  전
+  {
+    name: "2",
+    start_date: "2024-11-1",
+    end_date: "2024-11-2",
+    registration_start_date: "2024-9-4",
+    registration_end_date: "2024-10-12",
+    location: "광교복합체육센터",
+    meter: 50,
+    documentation: "",
+    depth: 2,
+    isRegistrationClosed: false,
+  },
+  // 선착순 접수 마감 전
+  {
+    name: "2",
+    start_date: "2024-11-1",
+    end_date: "2024-11-2",
+    registration_start_date: "2024-9-4",
+    registration_end_date: "2024-10-12",
+    location: "광교복합체육센터",
+    meter: 50,
+    documentation: "",
+    depth: 2,
+    isRegistrationClosed: false,
+  },
+  //접수 날짜 마감되고 대회 시작 전
+  {
+    name: "3",
+    start_date: "2024-11-1",
+    end_date: "2024-11-2",
+    registration_start_date: "2024-9-1",
+    registration_end_date: "2024-9-2",
+    location: "광교복합체육센터",
+    meter: 50,
+    documentation: "",
+    depth: 2,
+    isRegistrationClosed: false,
+  },
+  //접수 선착순 마감되고 대회 시작 전
+  {
+    name: "3",
+    start_date: "2024-11-1",
+    end_date: "2024-11-2",
+    registration_start_date: "2024-9-1",
+    registration_end_date: "2024-9-4",
+    location: "광교복합체육센터",
+    meter: 50,
+    documentation: "",
+    depth: 2,
+    isRegistrationClosed: true,
   },
   {
-    //접수시작 but 선착순마감
-    start_date: "20224-09-01",
-    end_date: "2024-09-02",
-    registration_start_date: "2024-07-01",
-    registration_end_date: "2024-08-12",
-    isClosed: true,
+    name: "4",
+    start_date: "2024-9-4",
+    end_date: "2024-9-12",
+    registration_start_date: "2024-8-1",
+    registration_end_date: "2024-8-4",
+    location: "광교복합체육센터",
+    meter: 50,
+    documentation: "",
+    depth: 2,
+    isRegistrationClosed: false,
   },
   {
-    //접수마감
-    start_date: "20224-09-01",
-    end_date: "2024-09-02",
-    registration_start_date: "2024-07-01",
-    registration_end_date: "2024-07-31",
-    isClosed: true,
-  },
-  {
-    //대회시작
-    start_date: "20224-09-01",
-    end_date: "2024-09-02",
-    registration_start_date: "2024-07-01",
-    registration_end_date: "2024-07-31",
-  },
-  {
-    //진행중
-    start_date: "20224-08-01",
-    end_date: "2024-08-02",
-    registration_start_date: "2024-07-01",
-    registration_end_date: "2024-07-31",
-  },
-  {
-    //종료
-    start_date: "2020-01-01",
-    end_date: "2020-01-02",
-    registration_start_date: "2019-01-01",
-    registration_end_date: "2019-01-10",
+    name: "5",
+    start_date: "2024-8-4",
+    end_date: "2024-8-12",
+    registration_start_date: "2024-6-1",
+    registration_end_date: "2024-6-4",
+    location: "광교복합체육센터",
+    meter: 50,
+    documentation: "",
+    depth: 2,
+    isRegistrationClosed: false,
   },
 ];
 
 type Props = {
   competition: Competition;
 };
+const STATUS = {
+  beforeRegistration: { title: "접수 시작까지", color: "#e0eeff" },
+  duringRegistration: { title: "접수 마감까지", color: "#c4deff" },
+  beforeCompetition: { title: "대회 시작까지", color: "#93c2ff" },
+  duringCompetition: { title: "진행중", color: "#1d7bf3" },
+  afterCompetition: { title: "종료", color: "#4276b8" },
+};
+type StatusKey = keyof typeof STATUS;
+
 function CompetitionCard({ competition }: Props) {
-  const STATUS = {
-    reservationStart: { title: "접수 시작", color: "#e0eeff" },
-    reservationFinished: { title: "접수 마감", color: "#c4deff" },
-    competitionStart: { title: "대회 시작", color: "#93c2ff" },
-    ongoing: { title: "진행중", color: "#1d7bf3" },
-    finished: { title: "종료", color: "#4276b8" },
-  };
   const today = dayjs();
 
-  const { name, start_date, end_date } = competition;
+  const {
+    name,
+    registration_start_date,
+    registration_end_date,
+    start_date,
+    end_date,
+    isRegistrationClosed = false,
+  } = competition;
+
+  const registrationStartDate = dayjs(registration_start_date);
+  const registrationEndDate = dayjs(registration_end_date);
+  const startDate = dayjs(start_date);
+  const endDate = dayjs(end_date);
+
+  const status: { key: StatusKey; remain?: string } = (() => {
+    if (today.isBefore(registrationStartDate)) {
+      return { key: "beforeRegistration", remain: `D - ${registrationStartDate.diff(today, "day")}` };
+    }
+    if (today.isBetween(registrationStartDate, registrationEndDate, null, "[]") && !isRegistrationClosed) {
+      return { key: "duringRegistration", remain: `D - ${registrationEndDate.diff(today, "day")}` };
+    }
+    if (today.isBetween(registrationEndDate, startDate, null, "()") || isRegistrationClosed) {
+      return { key: "beforeCompetition", remain: `D - ${startDate.diff(today, "day")}` };
+    }
+    if (today.isBetween(startDate, endDate, null, "[]")) {
+      return { key: "duringCompetition" };
+    }
+    return { key: "afterCompetition" };
+  })();
 
   return (
     <div className={$["competition-card"]}>
-      <div className={$["d-day"]}>
-        <div className={$.status}>접수 시작</div>
-        <div className={$.remain}>D-36</div>
+      <div className={$["d-day"]} style={{ background: STATUS[status.key].color }}>
+        <div className={$.status}>{STATUS[status.key].title}</div>
+        <div className={$.remain}>{status.remain}</div>
       </div>
       <div className={$.info}>
         <div className={$.name}>{name}</div>
