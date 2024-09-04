@@ -6,6 +6,7 @@ import ReactQueryProviders from "@/hooks/useReactQuery";
 import "dayjs/locale/ko";
 import dayjs from "dayjs";
 import React from "react";
+import NoPinchZoom from "@/components/NoPinchZoom";
 
 dayjs.locale("ko");
 
@@ -26,6 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
+        <NoPinchZoom />
         <ReactQueryProviders>
           <MantineProvider>{children}</MantineProvider>
         </ReactQueryProviders>
