@@ -1,8 +1,8 @@
 //TODO: 대회일정 상세 페이지 해야함
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
-import { ActionIcon, Button, Notification } from "@mantine/core";
+import { useRouter } from "next/navigation";
+import { ActionIcon, Button } from "@mantine/core";
 import Back from "@/assets/back.svg";
 import Download from "@/assets/download.svg";
 import { useCompetition } from "@/service/competition/useCompetitionService";
@@ -10,12 +10,19 @@ import $ from "./style.module.scss";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import PdfViewer from "@/components/PdfViewer";
+import { usePinchZoomStore } from "@/store/usePinchZoomStore";
 
 function Page({ params: { id } }: { params: { id: string } }) {
   const router = useRouter();
   const [showToast, setShowToast] = useState(false);
-
   const { data } = useCompetition({ competitionId: id });
+  const { setEnablePinchZoom } = usePinchZoomStore();
+
+  useEffect(() => {
+    setEnablePinchZoom(true);
+
+    return () => setEnablePinchZoom(false);
+  }, [setEnablePinchZoom]);
 
   useEffect(() => {
     if (showToast) {
