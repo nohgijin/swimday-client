@@ -6,17 +6,14 @@ import Back from "@/assets/back.svg";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Medal from "@/assets/temp-meal.jpg";
+import BackButton from "@/components/Back";
 
 function Page({ params: { id } }: { params: { id: string } }) {
   const router = useRouter();
 
   return (
     <main className={$["result-detail-page"]}>
-      <div className={$.back}>
-        <ActionIcon variant={"transparent"} onClick={() => router.back()} className={$["back-icon"]}>
-          <Back width={24} height={24} />
-        </ActionIcon>
-      </div>
+      <BackButton className={$.back} />
       <div className={$.detail}>
         <div className={$.ranking}>1위</div>
         <div className={$.record}>37.11</div>

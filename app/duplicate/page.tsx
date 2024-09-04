@@ -7,6 +7,7 @@ import $ from "./style.module.scss";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useQueryParams } from "@/utils/useQueryParams";
+import BackButton from "@/components/Back";
 
 function Page() {
   const router = useRouter();
@@ -16,10 +17,9 @@ function Page() {
   return (
     <main className={$["duplicate-page"]}>
       <div className={$["input-wrapper"]}>
-        <ActionIcon className={$["back"]} variant={"transparent"} onClick={() => router.back()}>
-          <Back width={24} height={24} />
-        </ActionIcon>
-        <SearchInput />
+        <BackButton>
+          <SearchInput />
+        </BackButton>
       </div>
       <div className={$["guide"]}>선수 검색결과와 팀 검색결과가 있습니다.</div>
       <div className={$["options"]}>

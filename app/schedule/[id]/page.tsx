@@ -11,6 +11,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import PdfViewer from "@/components/PdfViewer";
 import { usePinchZoomStore } from "@/store/usePinchZoomStore";
+import BackButton from "@/components/Back";
 
 function Page({ params: { id } }: { params: { id: string } }) {
   const router = useRouter();
@@ -59,9 +60,7 @@ function Page({ params: { id } }: { params: { id: string } }) {
   return (
     <main className={$["competition-detail-page"]}>
       <div className={$["competition-fixed"]}>
-        <ActionIcon className={$.back} variant={"transparent"} onClick={() => router.back()}>
-          <Back width={24} height={24} />
-        </ActionIcon>
+        <BackButton />
         <div className={$["competition-title-wrapper"]}>
           <div className={$.title}>{name}</div>
           <div className={$["update-date"]}>{start_date}</div>

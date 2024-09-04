@@ -12,6 +12,7 @@ import { PersonProps, PersonSearchResultCard, TeamProps, TeamSearchResultCard } 
 import { useRouter } from "next/navigation";
 import SearchInput from "@/components/SearchInput";
 import { initialState } from "@/store/useChipStore";
+import BackButton from "@/components/Back";
 
 const PERSON_MOCK_DATA = [
   {
@@ -94,19 +95,9 @@ function Page() {
   return (
     <main className={$["result-page"]}>
       <div className={$["sticky-header"]}>
-        <div className={$["input-wrapper"]}>
-          <ActionIcon
-            component={"button"}
-            className={$["back"]}
-            variant={"transparent"}
-            onClick={() => {
-              router.back();
-            }}
-          >
-            <Back width={24} height={24} />
-          </ActionIcon>
+        <BackButton>
           <SearchInput />
-        </div>
+        </BackButton>
         <ResultFilterGroup {...{ open }} />
       </div>
       {opened && <ResultDrawer {...{ opened, close }} />}

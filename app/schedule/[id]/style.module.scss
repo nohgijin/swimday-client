@@ -1,7 +1,7 @@
 .competition-detail-page {
   display: flex;
   flex-direction: column;
-  padding: 12px 24px 0 24px;
+  padding: 0 24px;
   background: $background-50;
   min-height: 100vh;
 
@@ -13,13 +13,8 @@
     z-index: 99999;
   }
 
-  .back {
-    width: auto;
-    margin: 12px auto 12px 0;
-  }
-
   .competition-title-wrapper {
-    padding: 24px 0;
+    padding: 8px 0 24px 0;
 
     .title {
       @include typo-semi-h1();
