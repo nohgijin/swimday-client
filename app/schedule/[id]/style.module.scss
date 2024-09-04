@@ -3,7 +3,7 @@
   flex-direction: column;
   padding: 12px 24px 0 24px;
   background: $background-50;
-  height: 100vh;
+  min-height: 100vh;
 
   .competition-fixed {
     position: sticky;
@@ -97,10 +97,10 @@
   padding: 12px;
   color: $text-black-60;
   opacity: 1;
-  transition: opacity 0.5s ease-out; /* 애니메이션 설정 */
+  transition: opacity 0.5s ease-out;
   @include typo-regular-body2;
 }
 
 .toast.hide {
-  opacity: 0; /* 숨길 때 투명하게 */
+  opacity: 0;
 }
