@@ -16,11 +16,9 @@ function Page() {
 
   return (
     <main className={$["duplicate-page"]}>
-      <div className={$["input-wrapper"]}>
-        <BackButton>
-          <SearchInput />
-        </BackButton>
-      </div>
+      <BackButton className={$["input-wrapper"]}>
+        <SearchInput />
+      </BackButton>
       <div className={$["guide"]}>선수 검색결과와 팀 검색결과가 있습니다.</div>
       <div className={$["options"]}>
         <Link href={`/result?name=${name}`} className={$["option"]}>
