@@ -5,10 +5,6 @@
   border-radius: 12px;
   padding: 24px;
 
-  .team {
-    margin-bottom: 8px;
-  }
-
   .name {
     @include typo-regular-body1;
     color: $text-black-20;
@@ -20,17 +16,22 @@
     flex-wrap: wrap;
     gap: 8px;
     margin-bottom: 24px;
+  }
 
-    .info {
-      padding: 8px 12px;
-      background: $background-30;
-      border-radius: 4px;
-      @include typo-regular-body3;
-      color: $text-black-30;
+  .info {
+    width: fit-content;
+    padding: 8px 12px;
+    background: $background-30;
+    border-radius: 4px;
+    @include typo-regular-body3;
+    color: $text-black-30;
 
-      &:empty {
-        display: none;
-      }
+    &.team {
+      margin-bottom: 8px;
+    }
+
+    &:empty {
+      display: none;
     }
   }
 

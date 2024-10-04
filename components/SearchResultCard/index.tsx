@@ -1,6 +1,7 @@
 "use client";
 import $ from "./style.module.scss";
 import Link from "next/link";
+import classNames from "classnames";
 
 export type PersonProps = {
   id: number;
@@ -29,7 +30,7 @@ export type TeamProps = {
 function TeamSearchResultCard({ id, name, team, ranking, member, gold, silver, bronze }: TeamProps) {
   return (
     <Link className={$["result-item"]} href={`/result/${id}`}>
-      <div className={$.team}>{team}</div>
+      <div className={classNames($.info, $.team)}>{team}</div>
       <div className={$.name}>{name}</div>
       <div className={$.result}>{ranking}위</div>
     </Link>
@@ -37,12 +38,11 @@ function TeamSearchResultCard({ id, name, team, ranking, member, gold, silver, b
 }
 
 function PersonSearchResultCard({ id, name, team, event, result, ranking, sex, age, isFin, meter }: PersonProps) {
-  const infos = [sex === "male" ? "남자" : "여자", `성인부 ${age}그룹`, `${event} ${meter}m`, isFin && "핀경기"];
+  const infos = [team, sex === "male" ? "남자" : "여자", `성인부 ${age}그룹`, `${event} ${meter}m`, isFin && "핀경기"];
   const results = `${result} ${ranking === -1 ? "(번외)" : `(${ranking}위)`}`;
 
   return (
     <Link className={$["result-item"]} href={`/result/${id}`}>
-      <div className={$.team}>{team}</div>
       <div className={$.name}>{name}</div>
       <div className={$.infos}>
         {infos.map((info) => (
