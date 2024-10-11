@@ -9,7 +9,6 @@ type States = {
   location: string[];
   meter: string[],
   date: string;
-  depth: string;
 };
 
 type Actions = {
@@ -20,7 +19,6 @@ type Actions = {
   setLocation: (location: States['location']) => void;
   setMeter: (meter: States['meter']) => void;
   setDate: (date: States['date']) => void;
-  setDepth: (depth: States['depth']) => void;
 };
 
 export const initialState: States = {
@@ -48,12 +46,11 @@ export const initialState: States = {
     'jeju',
   ],
   meter: ['half', 'full'],
-  date: '2010-01-01',
-  depth: '1.3',
+  date: '',
 }
 
 export const useChipStore = create(
-  immer<States & Actions>((set, get) => ({
+  immer<States & Actions>((set) => ({
     ...initialState,
     setResultSort: (resultSort) => {
       set((state) => {
@@ -88,11 +85,6 @@ export const useChipStore = create(
     setDate: (date) => {
       set((state) => {
         state.date = date
-      })
-    },
-    setDepth: (depth) => {
-      set((state) => {
-        state.depth = depth
       })
     },
   })),
