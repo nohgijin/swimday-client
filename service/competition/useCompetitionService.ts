@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import queryOptions from '@/service/competition/queries'
 
-export function useCompetitions({ meter }: { meter: string }) {
+export function useCompetitions({ meter }: { meter?: string }) {
   return useQuery(queryOptions.all({ meter }))
 }
 

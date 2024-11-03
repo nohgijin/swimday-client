@@ -29,10 +29,11 @@ function Page() {
   const location = queryParams.get('location')
   const meter = queryParams.get('meter')
   const date = queryParams.get('date')
-  console.log('asdf', sort, location, meter, date)
   const [isAccepting, setIsAccepting] = useState(false)
   const [opened, { open, close }] = useDisclosure(false)
-  const { data } = useCompetitions({ meter })
+  const { data } = useCompetitions({})
+
+  console.log(data, '데이터')
 
   useEffect(() => {
     const { scheduleSort, location, meter, date } = initialState

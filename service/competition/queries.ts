@@ -6,7 +6,7 @@ const queryKeys = {
 }
 
 const queryOptions = {
-  all: ({ meter }: { meter: string }) => ({
+  all: ({ meter }: { meter?: string }) => ({
     queryKey: queryKeys.all,
     queryFn: () => CompetitionService.getCompetitions({ meter }),
   }),
