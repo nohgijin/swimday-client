@@ -6,9 +6,17 @@ const queryKeys = {
 }
 
 const queryOptions = {
-  all: ({ meter }: { meter?: string }) => ({
+  all: ({ meter, page, pageSize }: {
+    meter: string | null;
+    page: number;
+    pageSize: number;
+  }) => ({
     queryKey: queryKeys.all,
-    queryFn: () => CompetitionService.getCompetitions({ meter }),
+    queryFn: () => CompetitionService.getCompetitions({ meter, page, pageSize }),
+    getNextPageParam: (lastPage, allPages) => {
+      const nextPageExists = lastPage?.data?.length === pageSize
+      return nextPageExists ? allPages.length + 1 : undefined
+    },
   }),
   detail: (competitionId: string) => ({
     queryKey: queryKeys.detail(competitionId),

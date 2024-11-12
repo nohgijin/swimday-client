@@ -244,11 +244,11 @@ function ScheduleChipGroup() {
     ],
     [
       {
-        value: 'half',
+        value: '25',
         label: '25m',
       },
       {
-        value: 'full',
+        value: '50',
         label: '50m',
       },
     ],

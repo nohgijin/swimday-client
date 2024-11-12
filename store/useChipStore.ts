@@ -45,7 +45,7 @@ export const initialState: States = {
     'gwangju',
     'jeju',
   ],
-  meter: ['half', 'full'],
+  meter: ['25', '50'],
   date: '',
 }
 

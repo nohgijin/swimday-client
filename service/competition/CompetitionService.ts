@@ -3,17 +3,33 @@ import { Competition } from '@/model/competition'
 import { Strapi, Strapis } from '@/service/Strapi'
 
 class CompetitionService extends Service {
-  getCompetitions({ meter }: { meter?: string }): Promise<Strapis<Competition>> {
-    // const queryObject = {
-    //   'filters[meter][$in]': meter.split(','),
-    // }
-    //
-    // const queryString = qs.stringify(queryObject, { arrayFormat: 'brackets', encodeValuesOnly: true })
-    //
-    // const url = `/competitions?${queryString}`
-    const url = `/competitions`
+  getCompetitions({ meter, page, pageSize }: {
+    meter: string | null;
+    page: number;
+    pageSize: number;
+  }): Promise<Strapis<Competition>> {
+    const queryObject = {
+      'pagination[page]': page,
+      'pagination[pageSize]': pageSize,
+    }
 
+    if (meter) {
+      queryObject['filters[meter][$in]'] = meter.split(',')
+    }
+
+    const queryString = Object.entries(queryObject)
+      .map(([key, value]) => {
+        if (Array.isArray(value)) {
+          return value.map(val => `${key}=${encodeURIComponent(val)}`).join('&')
+        }
+        return `${key}=${encodeURIComponent(value)}`
+      })
+      .join('&')
+
+
+    const url = `/competitions?${queryString}`
     return this.http.get<Strapis<Competition>>(url)
+
   }
 
   getCompetition(competitionId: string) {

@@ -134,7 +134,6 @@ function CompetitionCard({ competition }: Props) {
   const endDate = dayjs(end_date)
 
   const status: { key: string; remain?: string } = (() => {
-    console.log(competition)
     if (today.isBefore(registrationStartDate)) {
       return { key: 'beforeRegistration', remain: `D - ${registrationStartDate.diff(today, 'day')}` }
     }
