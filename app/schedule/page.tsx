@@ -30,10 +30,11 @@ function Page() {
   const meter = queryParams.get('meter')
   const date = queryParams.get('date')
   const [isAccepting, setIsAccepting] = useState(false)
+  const [hasMore, setHasMore] = useState(true)
+  const [page, setPage] = useState(1)
+  const pageSize = 50
   const [opened, { open, close }] = useDisclosure(false)
-  const { data } = useCompetitions({})
-
-  console.log(data, '데이터')
+  const { data, fetchNextPage, hasNextPage } = useCompetitions({ page, pageSize, meter })
 
   useEffect(() => {
     const { scheduleSort, location, meter, date } = initialState
@@ -63,12 +64,13 @@ function Page() {
         </div>
       </div>
       <div className={$['competitions']}>
-        {data?.data.map((competition) => (
-          <Link key={competition.id} href={`/schedule/${competition.id}`}>
-            <CompetitionCard competition={competition.attributes} />
-          </Link>
-        ))}
-
+        {data?.pages.flatMap((page) =>
+          page.data.map((competition) => (
+            <Link key={competition.id} href={`/schedule/${competition.id}`}>
+              <CompetitionCard competition={competition.attributes} />
+            </Link>
+          )),
+        )}
       </div>
     </main>
   )
